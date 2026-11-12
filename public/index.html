@@ -679,6 +679,101 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
 .gp-col-item { overflow-x: hidden; }
 .gp-col-item, .gp-janela .gp-sec, .gp-janela .gp-com, .gp-janela .gp-hist, .gp-janela .gp-lista > div, .gp-janela .gp-sub, .gp-janela .gp-crit { overflow-wrap: anywhere; word-break: break-word; min-width: 0; }
 .gp-janela .gp-com span, .gp-janela .gp-hist, .gp-janela .lnk-texto { overflow-wrap: anywhere; }
+/* ===== CRM · Clientes e Atendimento ===== */
+.conteudo:has(> #tela-crm:not([hidden])) { display: flex; flex-direction: column; overflow: hidden; padding: var(--s-4); }
+#tela-crm { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.crm-tela { display: flex; flex-direction: column; gap: var(--s-16); flex: 1; min-height: 0; }
+.crm-topo { display: flex; align-items: center; gap: var(--s-16); flex: none; }
+.crm-topo h1 { font-size: var(--t-31); font-weight: var(--titulo-peso); letter-spacing: var(--titulo-espaco); line-height: var(--titulo-entrelinha); }
+.crm-topo .crm-cresce { flex: 1; }
+.crm-trilha { display: flex; align-items: center; gap: var(--s-8); font-size: var(--t-12); color: var(--fraco); flex: none; }
+.crm-grade-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.op-card[data-op="clientes"] { --op-faixa: var(--verde-metal); --op-cor: var(--verde); }
+.op-card[data-op="atendimento"] { --op-faixa: var(--acento-metal); --op-cor: var(--acento-texto); }
+.crm-card-centro { justify-content: center; align-items: flex-start; gap: var(--s-12); }
+.crm-card-centro .op-titulo { font-size: clamp(28px, 3vw, 44px); font-weight: var(--titulo-peso); letter-spacing: var(--titulo-espaco); }
+
+/* números */
+.crm-numeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-16); flex: none; }
+.crm-num { position: relative; display: flex; flex-direction: column; gap: var(--s-8); padding: var(--s-24); overflow: hidden; border: 1px solid var(--linha); border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); text-align: left; font: inherit; color: var(--texto); cursor: pointer; transition: translate var(--dur) var(--curva), box-shadow var(--dur) var(--curva); }
+.crm-num::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--crm-faixa, var(--linha)); }
+.crm-num:hover { translate: 0 -4px; box-shadow: var(--sombra-alta); }
+.crm-num:focus-visible { outline: 1px solid var(--acento-texto); outline-offset: 1px; box-shadow: 0 0 0 4px var(--acento-claro); }
+.crm-num[data-f="entrada"] { --crm-faixa: var(--acento-metal); --crm-cor: var(--acento-texto); }
+.crm-num[data-f="vistos"] { --crm-faixa: var(--amarelo); --crm-cor: var(--texto); }
+.crm-num[data-f="producao"] { --crm-faixa: var(--verde-metal); --crm-cor: var(--verde); }
+.crm-num[data-f="backlog"] { --crm-faixa: var(--linha); --crm-cor: var(--fraco); }
+.crm-num-topo { display: flex; align-items: center; justify-content: space-between; color: var(--fraco); }
+.crm-num-n { font-size: clamp(32px, 3.4vw, 56px); font-weight: var(--numero-peso); letter-spacing: var(--titulo-espaco); line-height: 1; color: var(--crm-cor, var(--texto)); }
+.crm-num-r { font-size: var(--t-14); color: var(--fraco); }
+
+/* caixa de entrada */
+.crm-caixa { display: grid; grid-template-columns: minmax(0, 3fr) minmax(240px, 2fr); gap: var(--s-16); flex: 1; min-height: 0; }
+.crm-painel { display: flex; flex-direction: column; min-height: 0; border: 1px solid var(--linha); border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); overflow: hidden; }
+.crm-painel-topo { display: flex; align-items: center; gap: var(--s-8); padding: var(--s-16); border-bottom: 1px solid var(--linha); flex: none; }
+.crm-painel-topo h2 { font-size: var(--t-16); font-weight: var(--titulo-peso); letter-spacing: var(--titulo-espaco); flex: 1; }
+.crm-conta { min-width: 22px; padding: 2px var(--s-8); border-radius: 999px; background: var(--sup-2); color: var(--fraco); font-size: var(--t-12); font-weight: 600; text-align: center; }
+.crm-rolagem { flex: 1; min-height: 0; overflow-y: auto; }
+.crm-linha { position: relative; display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: var(--s-12); width: 100%; padding: var(--s-16); border-bottom: 1px solid var(--linha); text-align: left; color: var(--texto); transition: background var(--dur-rapida) var(--curva); }
+.crm-linha:hover { background: var(--realce); }
+.crm-abrir { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.crm-linha:has(.crm-abrir:focus-visible) { outline: 1px solid var(--acento-texto); outline-offset: -2px; }
+.crm-destinos { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: var(--s-8); margin-top: var(--s-8); opacity: 0; transition: opacity var(--dur-rapida) var(--curva); }
+.crm-linha:hover .crm-destinos, .crm-linha:has(:focus-visible) .crm-destinos { opacity: 1; }
+@media (hover: none) { .crm-destinos { opacity: 1; } }
+.crm-dest { display: inline-flex; align-items: center; gap: var(--s-4); height: 26px; padding: 0 var(--s-8); border: 1px solid var(--borda); border-radius: 999px; background: var(--sup); font: 500 var(--t-12) / 1 var(--fonte); color: var(--fraco); cursor: pointer; transition: color var(--dur-rapida) var(--curva), border-color var(--dur-rapida) var(--curva); }
+.crm-dest .ico { width: 13px; height: 13px; }
+.crm-dest:hover { color: var(--texto); border-color: var(--borda-campo); }
+.crm-dest[data-dest="producao"]:hover { color: var(--verde); border-color: var(--verde); }
+.crm-ponto { width: 8px; height: 8px; margin-top: 6px; border-radius: 999px; background: var(--acento); }
+.crm-linha[data-lido="1"] .crm-ponto { background: none; border: 1px solid var(--borda); }
+.crm-linha-c { display: flex; flex-direction: column; gap: var(--s-4); min-width: 0; }
+.crm-linha-1 { display: flex; align-items: baseline; gap: var(--s-8); }
+.crm-quem { font-size: var(--t-14); font-weight: 600; white-space: nowrap; }
+.crm-quando { margin-left: auto; font-size: var(--t-12); color: var(--fraco); white-space: nowrap; }
+.crm-assunto { font-size: var(--t-14); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.crm-linha[data-lido="1"] .crm-assunto, .crm-linha[data-lido="1"] .crm-quem { font-weight: 400; color: var(--fraco); }
+.crm-previa { font-size: var(--t-12); color: var(--fraco); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.crm-etqs { display: flex; flex-wrap: wrap; gap: var(--s-4); margin-top: 2px; }
+.crm-etq { display: inline-flex; align-items: center; gap: 4px; padding: 2px var(--s-8); border-radius: 999px; font-size: var(--t-12); background: var(--sup-2); color: var(--fraco); }
+.crm-etq[data-u="alta"], .crm-etq[data-u="critica"] { background: var(--perigo-fundo); color: var(--acento-texto); font-weight: 600; }
+.crm-etq[data-u="media"] { background: rgb(255 235 0 / 0.35); color: var(--texto); }
+.crm-etq[data-t="novo"] { background: var(--verde-claro); color: var(--verde); font-weight: 600; }
+.crm-vazio { padding: var(--s-32) var(--s-24); color: var(--fraco); font-size: var(--t-14); text-align: center; }
+
+/* ficha do item */
+.crm-item { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: var(--s-16); flex: 1; min-height: 0; }
+.crm-campo { display: flex; flex-direction: column; min-height: 0; border: 1px solid var(--linha); border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); overflow: hidden; }
+.crm-campo-topo { display: flex; align-items: center; gap: var(--s-8); padding: var(--s-12) var(--s-16); border-bottom: 1px solid var(--linha); color: var(--fraco); font-size: var(--t-12); text-transform: uppercase; letter-spacing: 0.06em; flex: none; }
+.crm-campo-corpo { flex: 1; min-height: 0; overflow-y: auto; padding: var(--s-24); font-size: var(--t-16); line-height: var(--texto-entrelinha); white-space: pre-wrap; overflow-wrap: anywhere; }
+#it-arquivo { display: flex; flex-direction: column; justify-content: center; }
+.crm-lado { display: grid; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: var(--s-16); min-height: 0; }
+.crm-arquivo { display: flex; align-items: center; gap: var(--s-12); padding: var(--s-16); border: 1px solid var(--linha); border-radius: var(--raio-b); background: var(--sup-2); }
+.crm-arquivo-n { font-size: var(--t-14); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.crm-arquivo-t { font-size: var(--t-12); color: var(--fraco); }
+.crm-data { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: var(--s-4); padding: var(--s-24); }
+.crm-data-n { font-size: clamp(24px, 2.4vw, 36px); font-weight: var(--numero-peso); letter-spacing: var(--titulo-espaco); line-height: 1; }
+.crm-data-r { font-size: var(--t-14); color: var(--fraco); }
+.crm-ficha-cab { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-8); flex: none; }
+.crm-acoes { display: flex; gap: var(--s-8); margin-left: auto; }
+
+@media (max-width: 1023px) {
+  .crm-caixa, .crm-item { grid-template-columns: minmax(0, 1fr); grid-auto-rows: min-content; align-content: start; }
+  .crm-numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .crm-grade-2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* planilha de clientes */
+.crm-planilha { flex: 1; min-height: 0; overflow: auto; }
+.crm-emp-n { font-weight: 600; }
+.crm-emp-d { font-size: var(--t-12); color: var(--fraco); }
+.crm-sit { display: inline-flex; align-items: center; gap: var(--s-8); font-size: var(--t-12); font-weight: 600; }
+.crm-sit::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: currentColor; }
+.crm-sit[data-s="ativo"] { color: var(--verde); }
+.crm-sit[data-s="inativo"] { color: var(--fraco); }
+.crm-apps { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+#t-clientes .crm-painel { flex: 1; min-height: 0; }
 </style>
 
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -798,6 +893,92 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
         </a>
       </div>
     </section>
+
+    <!-- CRM inicio -->
+    <section id="tela-crm" hidden aria-label="CRM">
+      <!-- 1 · CRM: só as duas caixas -->
+      <section id="t-crm" class="crm-tela" aria-label="CRM">
+        <div class="op-grade crm-grade-2" data-entra>
+          <button class="op-card crm-card-centro" type="button" data-op="clientes" data-ir="t-clientes">
+            <span class="op-topo"><span class="op-ico"><svg class="ico" aria-hidden="true"><use href="#users"/></svg></span><span class="op-seta"><svg class="ico" aria-hidden="true"><use href="#arrow-right"/></svg></span></span>
+            <h2 class="op-titulo">Clientes</h2>
+          </button>
+          <button class="op-card crm-card-centro" type="button" data-op="atendimento" data-ir="t-caixa">
+            <span class="op-topo"><span class="op-ico"><svg class="ico" aria-hidden="true"><use href="#message-circle"/></svg></span><span class="op-seta"><svg class="ico" aria-hidden="true"><use href="#arrow-right"/></svg></span></span>
+            <h2 class="op-titulo">Atendimento</h2>
+          </button>
+        </div>
+      </section>
+
+      <!-- 2b · Clientes: planilha -->
+      <section id="t-clientes" class="crm-tela" hidden aria-label="Clientes">
+        <header class="crm-topo">
+          <button class="btn btn-2" type="button" data-volta="t-crm"><svg class="ico" aria-hidden="true"><use href="#chevron-left"/></svg>Voltar</button>
+          <h1>Clientes</h1>
+        </header>
+        <div class="crm-painel">
+          <div class="crm-painel-topo"><svg class="ico" aria-hidden="true"><use href="#users"/></svg><h2>Stakeholders</h2><span class="crm-conta" id="c-stake">0</span></div>
+          <div class="crm-planilha">
+            <table class="t10-tabela">
+              <thead><tr><th>Responsável</th><th>Telefone</th><th>Empresa</th><th>APP's</th><th>Situação</th></tr></thead>
+              <tbody id="linhas-clientes"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 · Caixa de entrada, com a lateral -->
+      <section id="t-caixa" class="crm-tela" hidden aria-label="Caixa de entrada">
+        <header class="crm-topo">
+          <button class="btn btn-2" type="button" data-volta="t-crm"><svg class="ico" aria-hidden="true"><use href="#chevron-left"/></svg>Voltar</button>
+          <h1 id="caixa-titulo">Atendimento</h1>
+          <span class="crm-cresce"></span>
+          <span class="crm-trilha">CRM <svg class="ico" aria-hidden="true"><use href="#chevron-right"/></svg> Atendimento</span>
+        </header>
+        <div class="crm-caixa">
+          <div class="crm-painel">
+            <div class="crm-painel-topo"><svg class="ico" aria-hidden="true"><use href="#message-circle"/></svg><h2 id="lista-titulo">Caixa de entrada</h2><span class="crm-conta" id="c-entrada">0</span></div>
+            <div class="crm-rolagem" id="lista-entrada"></div>
+          </div>
+          <aside class="crm-painel" aria-label="Visualizados">
+            <div class="crm-painel-topo"><svg class="ico" aria-hidden="true"><use href="#eye"/></svg><h2>Visualizados</h2><span class="crm-conta" id="c-vistos">0</span></div>
+            <div class="crm-rolagem" id="lista-vistos"></div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 4 · Ficha da solicitação -->
+      <section id="t-item" class="crm-tela" hidden aria-label="Solicitação">
+        <header class="crm-topo">
+          <button class="btn btn-2" type="button" data-volta="t-caixa"><svg class="ico" aria-hidden="true"><use href="#chevron-left"/></svg>Voltar</button>
+          <h1 id="it-titulo">—</h1>
+        </header>
+        <div class="crm-ficha-cab">
+          <span id="it-etqs" class="crm-ficha-cab" style="gap:var(--s-8)"></span>
+          <span class="crm-acoes">
+            <button class="btn btn-2" type="button" id="it-prod"><svg class="ico" aria-hidden="true"><use href="#play"/></svg>Enviar para produção</button>
+            <button class="btn btn-2" type="button" id="it-back"><svg class="ico" aria-hidden="true"><use href="#archive"/></svg>Enviar para o backlog</button>
+          </span>
+        </div>
+        <div class="crm-item">
+          <div class="crm-campo">
+            <div class="crm-campo-topo"><svg class="ico" aria-hidden="true"><use href="#file-text"/></svg>Descrição detalhada</div>
+            <div class="crm-campo-corpo" id="it-desc"></div>
+          </div>
+          <div class="crm-lado">
+            <div class="crm-campo">
+              <div class="crm-campo-topo"><svg class="ico" aria-hidden="true"><use href="#file-text"/></svg>Arquivo</div>
+              <div class="crm-campo-corpo" id="it-arquivo"></div>
+            </div>
+            <div class="crm-campo">
+              <div class="crm-campo-topo"><svg class="ico" aria-hidden="true"><use href="#calendar"/></svg>Data máxima</div>
+              <div class="crm-data"><b class="crm-data-n" id="it-data">—</b><span class="crm-data-r" id="it-data-r"></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <!-- CRM fim -->
 
     <section id="tela-branca" hidden aria-label="Tela em branco"></section>
 
@@ -1121,10 +1302,12 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
     var modulo = SUB[h] ? '#operacoes' : h;
     itens.forEach(function (a) { if (a.getAttribute('href') === modulo) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('tela-cofre').hidden = h !== '#cofre'; $('tela-op').hidden = h !== '#operacoes'; $('tela-op-sub').hidden = !SUB[h];
-    $('tela-vazia').hidden = !!(h === '#cofre' || h === '#operacoes' || SUB[h]);
+    $('tela-crm').hidden = h !== '#crm';
+    $('tela-vazia').hidden = !!(h === '#cofre' || h === '#operacoes' || h === '#crm' || SUB[h]);
     $('tela-vazia-txt').textContent = (NOMES[h] || '') + ': ainda sem conteúdo.';
     if (h === '#cofre') { entrar($('tela-cofre').firstElementChild); if (!carregou) carregar(); }
     if (h === '#operacoes') { entrar($('tela-op').firstElementChild); carregarOp(); }
+    if (h === '#crm') crmEntrar();
     if (SUB[h]) { var ehAtivo = h === '#ativo'; $('op-sub-titulo').textContent = ehAtivo ? '' : SUB[h]; $('op-sub-titulo').hidden = ehAtivo; $('gp').hidden = !ehAtivo; if (ehAtivo) gpEntrar(); else $('op-voltar').focus(); }
   }
   window.addEventListener('hashchange', rota);
@@ -2550,6 +2733,191 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
 
   // Ativo é uma tela só: Voltar leva direto a Operações
   function gpVoltar() { return false; }
+
+  /* ================= CRM · Clientes e Atendimento =================
+     Dados de exemplo fixos nesta fase, por decisão do Raphael (12/11/2026).
+     Nada aqui lê ou grava no banco. */
+  var crmEntrar = (function () {
+
+    /* ---- dados de exemplo (nada vem do banco neste protótipo) ---- */
+    var PESSOAS = {
+      adrian: { nome: 'Adrian', fone: '(11) 98123-4567', empresa: 'Meridiano Participações', cnpj: '12.345.678/0001-90', apps: 2, situacao: 'ativo' },
+      lucas:  { nome: 'Lucas',  fone: '(11) 99456-1238', empresa: 'Vértice Logística',       cnpj: '98.765.432/0001-15', apps: 1, situacao: 'ativo' },
+      exemplo:{ nome: 'Exemplo de inativo', fone: '(11) 97000-0000', empresa: 'Companhia Fictícia', cnpj: '00.000.000/0001-00', apps: 0, situacao: 'inativo' }
+    };
+    var URG = { baixa: 'Baixa', media: 'Média', alta: 'Alta', critica: 'Crítica' };
+    var CAT = { app: 'Novo aplicativo', melhoria: 'Melhoria pontual' };
+
+    var SOL = [
+      { id: 1, quem: 'adrian', titulo: 'Painel de comissões para a equipe comercial',
+        cat: 'app', urg: 'alta', via: 'app', visto: false, situacao: 'aguardando',
+        quando: 'há 2 h', data: '2026-12-15',
+        arq: { nome: 'regras-comissao.xlsx', tam: '48 KB' },
+        desc: 'Hoje a equipe comercial fecha a comissão numa planilha separada, e todo mês alguém refaz a conta na mão.\n\nA ideia é um painel onde cada vendedor veja o que já fechou no mês, o que está em negociação e quanto isso vira de comissão pela regra atual.\n\nPrecisa somar por vendedor e por equipe, e travar o mês depois do fechamento para ninguém mexer para trás. A planilha em anexo tem as faixas de comissão que valem hoje.' },
+
+      { id: 2, quem: 'lucas', titulo: 'Exportar o relatório de atendimentos em PDF',
+        cat: 'melhoria', urg: 'media', via: 'whatsapp', visto: false, situacao: 'aguardando',
+        quando: 'há 5 h', data: '',
+        arq: null,
+        desc: 'O relatório de atendimentos já existe na tela, mas só dá para olhar.\n\nPreciso mandar ele para o cliente por e-mail toda sexta, e hoje eu tiro print da tela e colo no Word.\n\nUm botão de exportar em PDF, mantendo o mesmo layout da tela, já resolveria.' },
+
+      { id: 3, quem: 'adrian', titulo: 'Campo de observação no cadastro de cliente',
+        cat: 'melhoria', urg: 'baixa', via: 'app', visto: false, situacao: 'aguardando',
+        quando: 'ontem', data: '',
+        arq: null,
+        desc: 'Falta um lugar para anotar combinados que não cabem nos campos fixos — prazo de pagamento diferente, contato alternativo, esse tipo de coisa.\n\nUm campo de texto livre no cadastro, que apareça junto dos dados do cliente, resolve.' },
+
+      { id: 4, quem: 'lucas', titulo: 'App de vistoria em campo, funcionando offline',
+        cat: 'app', urg: 'critica', via: 'whatsapp', visto: true, situacao: 'aguardando',
+        quando: 'há 2 dias', data: '2026-11-28',
+        arq: { nome: 'roteiro-vistoria.pdf', tam: '1,2 MB' },
+        desc: 'As vistorias acontecem em obra, onde quase nunca tem sinal.\n\nHoje o time preenche no papel e digita de novo no escritório à noite — o que gera retrabalho e erro de digitação.\n\nPrecisa funcionar sem internet e sincronizar sozinho quando o celular voltar a ter sinal. Tirar foto no próprio item da vistoria é obrigatório. O roteiro em anexo é o que usamos no papel hoje.' },
+
+      { id: 5, quem: 'adrian', titulo: 'Avisar por e-mail quando a solicitação mudar de etapa',
+        cat: 'melhoria', urg: 'media', via: 'app', visto: true, situacao: 'aguardando',
+        quando: 'há 3 dias', data: '',
+        arq: null,
+        desc: 'Depois que eu mando uma solicitação, não tenho como saber o que aconteceu com ela sem perguntar.\n\nUm e-mail curto a cada mudança de etapa já resolveria: foi vista, entrou em produção, foi concluída.' },
+
+      { id: 6, quem: 'lucas', titulo: 'Integrar a agenda com o Google Calendar',
+        cat: 'melhoria', urg: 'alta', via: 'app', visto: true, situacao: 'producao',
+        quando: 'há 1 semana', data: '2026-12-01', arq: null,
+        desc: 'Os compromissos marcados no sistema não aparecem no celular do time.' },
+
+      { id: 7, quem: 'adrian', titulo: 'Tema escuro',
+        cat: 'melhoria', urg: 'baixa', via: 'app', visto: true, situacao: 'backlog',
+        quando: 'há 2 semanas', data: '', arq: null,
+        desc: 'Pedido do time que usa o sistema à noite.' }
+    ];
+
+    /* ---- navegação entre as telas ---- */
+    var TELAS = ['t-crm', 't-clientes', 't-caixa', 't-item'];
+    function mostrar(id) {
+      TELAS.forEach(function (t) { $(t).hidden = t !== id; });
+      var el = $(id).querySelector('[data-entra]') || $(id);
+      entrar(el);
+      window.scrollTo(0, 0);
+    }
+    document.addEventListener('click', function (e) {
+      if ($('tela-crm').hidden) return;
+      var card = e.target.closest('[data-ir]');
+      if (card) { if (card.dataset.ir === 't-caixa') abrirCaixa('entrada'); else mostrar(card.dataset.ir); return; }
+      var volta = e.target.closest('[data-volta]');
+      if (volta) { mostrar(volta.dataset.volta); return; }
+      var dest = e.target.closest('.crm-dest');
+      if (dest) { mandar(+dest.dataset.id, dest.dataset.dest); return; }
+      var abrir = e.target.closest('.crm-abrir');
+      if (abrir) { abrirItem(+abrir.dataset.id); return; }
+    });
+
+    /* ---- contagens ---- */
+    function entrada() { return SOL.filter(function (s) { return s.situacao === 'aguardando' && !s.visto; }); }
+    function vistos() { return SOL.filter(function (s) { return s.situacao === 'aguardando' && s.visto; }); }
+    function por(sit) { return SOL.filter(function (s) { return s.situacao === sit; }); }
+
+    function numeros() {
+      $('c-stake').textContent = Object.keys(PESSOAS).length;
+    }
+
+    /* ---- listas ---- */
+    function linha(s) {
+      var p = PESSOAS[s.quem];
+      return '<div class="crm-linha" data-lido="' + (s.visto ? 1 : 0) + '">' +
+        '<button class="crm-abrir" type="button" data-id="' + s.id + '" aria-label="Abrir ' + esc(s.titulo) + '"></button>' +
+        '<span class="crm-ponto"></span>' +
+        '<span class="crm-linha-c">' +
+          '<span class="crm-linha-1"><span class="crm-quem">' + esc(p.nome) + '</span><span class="crm-quando">' + esc(s.quando) + '</span></span>' +
+          '<span class="crm-assunto">' + esc(s.titulo) + '</span>' +
+          '<span class="crm-previa">' + esc(String(s.desc).split('\n')[0]) + '</span>' +
+          '<span class="crm-etqs">' +
+            (s.cat === 'app' ? '<span class="crm-etq" data-t="novo">' + ic('plus') + CAT.app + '</span>' : '<span class="crm-etq">' + ic('pencil') + CAT.melhoria + '</span>') +
+            '<span class="crm-etq" data-u="' + s.urg + '">' + URG[s.urg] + '</span>' +
+            (s.data ? '<span class="crm-etq">' + ic('calendar') + dataBR(s.data) + '</span>' : '') +
+            (s.arq ? '<span class="crm-etq">' + ic('file-text') + '1</span>' : '') +
+          '</span>' +
+          '<span class="crm-destinos">' +
+            '<button class="crm-dest" type="button" data-dest="producao" data-id="' + s.id + '">' + ic('play') + 'Produção</button>' +
+            '<button class="crm-dest" type="button" data-dest="backlog" data-id="' + s.id + '">' + ic('archive') + 'Backlog</button>' +
+          '</span>' +
+        '</span></div>';
+    }
+    function vazio(t) { return '<p class="crm-vazio">' + esc(t) + '</p>'; }
+
+    function desenharListas(filtro) {
+      var principal = filtro === 'vistos' ? vistos() : filtro === 'producao' ? por('producao') : filtro === 'backlog' ? por('backlog') : entrada();
+      var rotulo = filtro === 'vistos' ? 'Visualizados' : filtro === 'producao' ? 'Em produção' : filtro === 'backlog' ? 'No backlog' : 'Caixa de entrada';
+      $('lista-titulo').textContent = rotulo;
+      $('caixa-titulo').textContent = rotulo;
+      $('c-entrada').textContent = principal.length;
+      $('lista-entrada').innerHTML = principal.length ? principal.map(linha).join('') : vazio('Nada por aqui agora.');
+      var v = vistos();
+      $('c-vistos').textContent = v.length;
+      $('lista-vistos').innerHTML = v.length ? v.map(linha).join('') : vazio('Nenhuma solicitação aberta aguardando destino.');
+    }
+
+    function abrirCaixa(filtro) { desenharListas(filtro); mostrar('t-caixa'); }
+
+    function mandar(id, destino) {
+      var s = SOL.filter(function (x) { return x.id === id; })[0];
+      if (!s) return;
+      s.situacao = destino;
+      s.visto = true;
+      desenharListas('entrada');
+      if (typeof toast === 'function') {
+        toast('sucesso', destino === 'producao' ? 'Foi para produção' : 'Foi para o backlog', s.titulo);
+      }
+    }
+
+    function desenharClientes() {
+      $('linhas-clientes').innerHTML = Object.keys(PESSOAS).map(function (k) {
+        var p = PESSOAS[k];
+        return '<tr>' +
+          '<td>' + esc(p.nome) + '</td>' +
+          '<td>' + esc(p.fone) + '</td>' +
+          '<td><div class="crm-emp-n">' + esc(p.empresa) + '</div><div class="crm-emp-d">' + esc(p.cnpj) + '</div></td>' +
+          '<td class="crm-apps">' + p.apps + '</td>' +
+          '<td><span class="crm-sit" data-s="' + p.situacao + '">' + (p.situacao === 'ativo' ? 'Ativo' : 'Inativo') + '</span></td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    /* ---- ficha ---- */
+    function dataBR(iso) { if (!iso) return ''; var p = String(iso).split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+    function diasAte(iso) {
+      if (!iso) return '';
+      var hoje = new Date(2026, 10, 12), alvo = new Date(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10));
+      var d = Math.round((alvo - hoje) / 86400000);
+      return d < 0 ? 'venceu há ' + (-d) + (d === -1 ? ' dia' : ' dias') : d === 0 ? 'é hoje' : 'faltam ' + d + (d === 1 ? ' dia' : ' dias');
+    }
+
+    function abrirItem(id) {
+      var s = SOL.filter(function (x) { return x.id === id; })[0];
+      if (!s) return;
+      var p = PESSOAS[s.quem];
+      $('it-titulo').textContent = s.titulo;
+      $('it-etqs').innerHTML =
+        '<span class="crm-etq">' + ic('user') + esc(p.nome) + '</span>' +
+        (s.cat === 'app' ? '<span class="crm-etq" data-t="novo">' + ic('plus') + CAT.app + '</span>' : '<span class="crm-etq">' + ic('pencil') + CAT.melhoria + '</span>') +
+        '<span class="crm-etq" data-u="' + s.urg + '">Urgência ' + URG[s.urg].toLowerCase() + '</span>' +
+        '<span class="crm-etq">' + ic(s.via === 'whatsapp' ? 'message-circle' : 'layout-dashboard') + (s.via === 'whatsapp' ? 'WhatsApp' : 'App do cliente') + '</span>' +
+        '<span class="crm-etq">' + ic('clock') + esc(s.quando) + '</span>';
+      $('it-desc').textContent = s.desc;
+      $('it-arquivo').innerHTML = s.arq
+        ? '<div class="crm-arquivo">' + ic('file-text') + '<span><span class="crm-arquivo-n">' + esc(s.arq.nome) + '</span><br><span class="crm-arquivo-t">' + esc(s.arq.tam) + '</span></span></div>'
+        : '<p class="crm-vazio">Nenhum arquivo anexado.</p>';
+      $('it-data').textContent = s.data ? dataBR(s.data) : '—';
+      $('it-data-r').textContent = s.data ? diasAte(s.data) : 'Sem data máxima definida.';
+      mostrar('t-item');
+    }
+
+    var crmPronto = false;
+    function crmEntrar() {
+      if (!crmPronto) { numeros(); desenharClientes(); desenharListas('entrada'); crmPronto = true; }
+      mostrar('t-crm');
+    }
+    return crmEntrar;
+  })();
+  /* fim CRM */
 
   rota();
 })();
