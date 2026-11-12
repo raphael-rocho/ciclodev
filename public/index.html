@@ -757,6 +757,80 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
 .gp-ficha .gp-sec > h3 { font-size: var(--t-12); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fraco); }
 .gp-ficha #gi-crit .gp-sec { border: 1px solid var(--linha); border-radius: var(--raio-c); padding: var(--s-16); }
 @media (max-width: 1023px) { .fx-corpo { grid-template-columns: minmax(0, 1fr); } }
+
+/* ===== abas: seis em evidência, o resto no + ===== */
+.ab-linha { position: relative; display: flex; align-items: stretch; gap: var(--s-4); border-bottom: 1px solid var(--linha); margin-top: var(--s-24); }
+.ab-linha > .abas-luz { border-bottom: 0; margin: 0; flex: 1; min-width: 0; }
+.ab-mais { display: inline-flex; align-items: center; gap: 4px; flex: none; height: 40px; padding: 0 var(--s-12); border: 0; background: none; color: var(--fraco); font: 500 var(--t-14) / 1 var(--fonte); cursor: pointer; border-radius: var(--raio-b) var(--raio-b) 0 0; }
+.ab-mais:hover { background: var(--realce); color: var(--texto); }
+.ab-menu { position: absolute; right: 0; top: calc(100% + 4px); z-index: 5; min-width: 200px; }
+
+/* ===== Resumo ===== */
+.rs { display: grid; gap: var(--s-16); margin-top: var(--s-16); }
+.rs-sprint { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8) var(--s-24); align-items: center; padding: var(--s-16) var(--s-24); border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); }
+.rs-sprint h2 { font-size: var(--t-20); }
+.rs-sprint-d { font-size: var(--t-14); color: var(--fraco); }
+.rs-sprint-p { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s-12); }
+.rs-barra { height: 10px; border-radius: 999px; background: var(--sup-2); box-shadow: inset 0 0 0 1px var(--linha); overflow: hidden; }
+.rs-barra i { display: block; height: 100%; border-radius: inherit; background: var(--verde-metal); }
+.rs-nums { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s-12); }
+.rs-n { position: relative; display: grid; gap: var(--s-4); padding: var(--s-16); overflow: hidden; border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); }
+.rs-n::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--rs-f, var(--linha)); }
+.rs-n[data-c="verde"] { --rs-f: var(--verde-metal); --rs-cor: var(--verde); }
+.rs-n[data-c="amarelo"] { --rs-f: var(--amarelo); --rs-cor: var(--texto); }
+.rs-n[data-c="vermelho"] { --rs-f: var(--acento-metal); --rs-cor: var(--acento-texto); }
+.rs-n[data-c="brilho"] { --rs-f: var(--acento-brilho); --rs-cor: var(--acento-brilho); }
+.rs-n[data-c="neutro"] { --rs-f: var(--texto); --rs-cor: var(--texto); }
+.rs-n b { font-size: clamp(26px, 2.6vw, 38px); font-weight: var(--numero-peso); line-height: 1; letter-spacing: -0.02em; color: var(--rs-cor, var(--texto)); font-variant-numeric: tabular-nums; }
+.rs-n span { font-size: var(--t-12); color: var(--fraco); }
+.rs-duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--s-16); align-items: start; }
+.rs-cx { border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); overflow: hidden; }
+.rs-cx-topo { display: flex; align-items: center; gap: var(--s-8); padding: var(--s-12) var(--s-16); border-bottom: 1px solid var(--linha); }
+.rs-cx-topo h3 { flex: 1; font-size: var(--t-14); }
+.rs-cx-corpo { padding: var(--s-16); display: grid; gap: var(--s-12); }
+.rs-f { display: grid; grid-template-columns: 76px minmax(0, 1fr) 28px; align-items: center; gap: var(--s-8); font-size: var(--t-12); }
+.rs-f-r { color: var(--fraco); }
+.rs-f-b { height: 16px; border-radius: 6px; background: var(--sup-2); overflow: hidden; }
+.rs-f-b i { display: block; height: 100%; background: var(--rs-c, var(--texto)); }
+.rs-f[data-e="to do"] { --rs-c: rgb(17 17 17 / 0.45); }
+.rs-f[data-e="progress"] { --rs-c: var(--amarelo); }
+.rs-f[data-e="review"] { --rs-c: var(--acento-metal); }
+.rs-f[data-e="rework"] { --rs-c: var(--acento-brilho); }
+.rs-f[data-e="done"] { --rs-c: var(--verde-metal); }
+.rs-f-n { font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.rs-p { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--s-8); font-size: var(--t-14); }
+.rs-p-b { display: block; height: 8px; border-radius: 999px; background: var(--sup-2); overflow: hidden; }
+.rs-p-b i { display: block; height: 100%; background: var(--texto); }
+.rs-lin { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--s-8); padding: var(--s-8) 0; border-bottom: 1px solid var(--linha); font-size: var(--t-14); }
+.rs-lin:last-child { border-bottom: 0; }
+.rs-lin .gp-cresce { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.rs-lin .gp-cresce:hover { text-decoration: underline; }
+
+/* ===== Cronograma ===== */
+.cr { margin-top: var(--s-16); border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); overflow: hidden; }
+.cr-rol { overflow-x: auto; }
+.cr-grade { min-width: 900px; }
+.cr-cab { display: grid; grid-template-columns: 260px repeat(8, minmax(72px, 1fr)); border-bottom: 1px solid var(--linha); background: var(--sup-2); }
+.cr-cab span { padding: var(--s-8); font-size: var(--t-12); font-weight: 600; color: var(--fraco); text-align: center; border-left: 1px solid var(--linha); }
+.cr-cab span:first-child { text-align: left; border-left: 0; text-transform: uppercase; letter-spacing: 0.06em; }
+.cr-cab span[data-hoje] { color: var(--acento-texto); }
+.cr-grupo { padding: var(--s-8) var(--s-16); font: 600 11px / 1.2 var(--fonte); letter-spacing: 0.06em; text-transform: uppercase; color: var(--fraco); background: var(--realce); border-bottom: 1px solid var(--linha); }
+.cr-l { display: grid; grid-template-columns: 260px repeat(8, minmax(72px, 1fr)); border-bottom: 1px solid var(--linha); align-items: center; min-height: 44px; }
+.cr-l:last-child { border-bottom: 0; }
+.cr-l:hover { background: var(--realce); }
+.cr-nome { display: flex; align-items: center; gap: var(--s-8); padding: var(--s-8) var(--s-16); min-width: 0; }
+.cr-nome .gp-cresce { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--t-14); text-align: left; }
+.cr-nome .gp-cresce:hover { text-decoration: underline; }
+.cr-faixa { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(8, minmax(72px, 1fr)); position: relative; align-items: center; min-height: 44px; }
+.cr-b { height: 22px; border-radius: 6px; background: var(--cr-c, var(--sup-2)); display: flex; align-items: center; padding: 0 var(--s-8); font-size: var(--t-12); font-weight: 600; color: var(--cr-t, var(--texto)); white-space: nowrap; overflow: hidden; }
+.cr-b[data-e="done"] { --cr-c: var(--verde-claro); --cr-t: var(--verde); }
+.cr-b[data-e="progress"] { --cr-c: var(--amarelo); }
+.cr-b[data-e="review"] { --cr-c: var(--acento-claro); --cr-t: var(--acento-texto); }
+.cr-b[data-e="rework"] { --cr-c: var(--acento-brilho); --cr-t: var(--texto); }
+.cr-b[data-atrasado] { box-shadow: inset 0 0 0 1.5px var(--acento); }
+.cr-marco { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 var(--s-8); border-radius: 999px; background: var(--texto); color: var(--sup); font-size: var(--t-12); font-weight: 600; white-space: nowrap; }
+.cr-pe { padding: var(--s-12) var(--s-16); border-top: 1px solid var(--linha); font-size: var(--t-12); color: var(--fraco); }
+@media (max-width: 767px) { .rs-nums { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* ===== Visão geral ===== */
 .conteudo:has(> #tela-visao:not([hidden])) { padding: 0 var(--s-8); }
 .vg-tela { display: flex; flex-direction: column; gap: var(--s-16); padding-block: var(--s-8) var(--s-24); }
@@ -2125,14 +2199,23 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
   function gpCarregarApp() { return sql(Q.quadro(GP.app.id)).then(function (rows) { GP.d = obj(rows); sql(Q.filtros()).then(function (fs) { GP.filtrosSalvos = fs || []; }).catch(function () {}); return GP.d; }); }
   function recarregarTudo() { return gpCarregarApp().then(function () { gpDesenharApp(); sql(Q.listaApps()).then(function (r) { GP.apps = r; desenharListaApps(); }).catch(function () {}); }); }
 
-  var VISTAS = [['quadro', 'Quadro'], ['backlog', 'Backlog e ideias'], ['epicos', 'Épicos'], ['tabela', 'Tabela'], ['ritos', 'Sprints e versões'], ['equipe', 'Equipe e indicadores'], ['integracoes', 'Integrações']];
+  var VISTAS = [['resumo', 'Resumo'], ['tabela', 'Lista'], ['quadro', 'Quadro'], ['backlog', 'Backlog'], ['crono', 'Cronograma'], ['equipe', 'Relatórios']];
+  var VISTAS_MAIS = [['epicos', 'Épicos'], ['ritos', 'Sprints e versões'], ['integracoes', 'Integrações']];
   function gpDesenharApp() {
     var d = GP.d, a = d.app, nIdeias = d.itens.filter(function (i) { return i.tipo === 'ideia'; }).length, nBack = d.itens.filter(function (i) { return i.etapa === 'backlog' && i.tipo !== 'ideia' && i.tipo !== 'subtarefa'; }).length, nEpicos = d.itens.filter(function (i) { return i.tipo === 'epico'; }).length;
     $('gp-cab').innerHTML = '<header class="gp-topo"><div><p class="gp-trilha">' + esc(a.projeto) + ' ' + ic('chevron-right') + ' <span class="gp-chave">' + esc(a.prefixo) + '</span></p><h1>' + esc(a.nome) + '</h1></div>' +
       '<div class="gp-acoes"><div class="seg-modo" role="group" aria-label="Modo do quadro"><button type="button" data-gp-modo="kanban" aria-pressed="' + (a.modo !== 'scrum') + '">Kanban</button><button type="button" data-gp-modo="scrum" aria-pressed="' + (a.modo === 'scrum') + '">Scrum</button></div>' +
       '<button class="btn btn-2 btn-icone" type="button" data-gp="recarregar" aria-label="Recarregar" title="Recarregar">' + ic('refresh-cw') + '</button><button class="btn" type="button" data-gp="novo">' + ic('plus') + 'Item</button></div></header>' +
-      '<div class="abas-luz" role="tablist" aria-label="Vistas do aplicativo">' + VISTAS.map(function (v) { var n = v[0] === 'backlog' ? nIdeias + nBack : v[0] === 'epicos' ? nEpicos : 0; return '<button role="tab" type="button" data-gp-vista="' + v[0] + '" aria-selected="' + (GP.vista === v[0]) + '"' + (GP.vista === v[0] ? '' : ' tabindex="-1"') + '>' + v[1] + (n ? ' <span class="aba-n">' + n + '</span>' : '') + '</button>'; }).join('') + '</div>';
-    if (GP.vista === 'quadro' || GP.vista === 'tabela') gpDesenharItens();
+      '<div class="ab-linha">' +
+        '<div class="abas-luz" role="tablist" aria-label="Vistas do aplicativo">' + VISTAS.concat(VISTAS_MAIS.filter(function (v) { return GP.vista === v[0]; })).map(function (v) {
+          var n = v[0] === 'backlog' ? nIdeias + nBack : v[0] === 'epicos' ? nEpicos : 0;
+          return '<button role="tab" type="button" data-gp-vista="' + v[0] + '" aria-selected="' + (GP.vista === v[0]) + '"' + (GP.vista === v[0] ? '' : ' tabindex="-1"') + '>' + v[1] + (n ? ' <span class="aba-n">' + n + '</span>' : '') + '</button>';
+        }).join('') + '</div>' +
+        '<button class="ab-mais" type="button" data-gp="mais-vistas" aria-haspopup="true">' + ic('plus') + 'Mais</button>' +
+      '</div>';
+    if (GP.vista === 'resumo') gpResumo();
+    else if (GP.vista === 'crono') gpCronograma();
+    else if (GP.vista === 'quadro' || GP.vista === 'tabela') gpDesenharItens();
     else if (GP.vista === 'backlog') gpBacklog();
     else if (GP.vista === 'epicos') gpEpicos();
     else if (GP.vista === 'ritos') gpRitos();
@@ -2310,6 +2393,122 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
         (ordenada.length ? ordenada.map(function (i) { var pai = i.tipo === 'subtarefa' ? d.itens.filter(function (x) { return x.id === i.pai_id; })[0] : null; return '<tr' + (ed ? '' : ' tabindex="0" data-gp-abrir="' + esc(i.id) + '"') + '>' + (ed ? '<td><input type="checkbox" class="gp-marca" data-gp-sel="' + esc(i.id) + '"' + (GP.sel[i.id] ? ' checked' : '') + ' aria-label="Marcar ' + esc(i.chave) + '"></td>' : '') + '<td class="gp-chave">' + (ed ? '<button class="gp-txt-btn lnk-texto" type="button" data-gp-abrir="' + esc(i.id) + '">' + esc(i.chave) + '</button>' : esc(i.chave)) + '</td><td>' + (pai ? '<span class="card-fraco">' + esc(pai.chave) + ' › </span>' : '') + (ed ? '<input class="campo-input gp-cel gp-cel-txt" data-gp-cel="titulo" data-gp-id="' + esc(i.id) + '" value="' + esc(i.titulo) + '" maxlength="300" aria-label="Título">' : esc(i.titulo)) + (i.sinalizado ? ' <span class="gp-tipo" data-t="bug">Bloqueada</span>' : '') + '</td><td><span class="gp-tipo" data-t="' + esc(i.tipo) + '">' + esc(TIPO_N[i.tipo]) + '</span></td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="etapa" data-gp-id="' + esc(i.id) + '" aria-label="Etapa">' + opcoesFixas(ETQ, i.etapa) + '</select>' : esc(ETQ[i.etapa])) + '</td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="prioridade" data-gp-id="' + esc(i.id) + '" aria-label="Prioridade">' + opcoesFixas(PRIO_N, i.prioridade) + '</select>' : '<span class="gp-tipo gp-prio" data-p="' + esc(i.prioridade) + '">' + esc(PRIO_N[i.prioridade]) + '</span>') + '</td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="tipo_frente_id" data-gp-id="' + esc(i.id) + '" aria-label="Frente">' + opcoes(d.frentes, i.tipo_frente_id, 'Sem frente') + '</select>' : esc(nomeDe(d.frentes, i.tipo_frente_id))) + '</td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="responsavel_id" data-gp-id="' + esc(i.id) + '" aria-label="Responsável">' + opcoes(d.pessoas, i.responsavel_id, 'Sem responsável') + '</select>' : nomeDe(d.pessoas, i.responsavel_id) ? esc(nomeDe(d.pessoas, i.responsavel_id)) : '<span class="gp-falta">sem responsável</span>') + '</td><td class="cf-mono">' + (ed ? '<input class="campo-input gp-cel" type="date" data-gp-cel="prazo" data-gp-id="' + esc(i.id) + '" value="' + esc(i.prazo ? String(i.prazo).slice(0, 10) : '') + '" aria-label="Prazo">' : i.prazo ? (atrasado(i) ? '<span class="gp-atr">' + dataBR(i.prazo) + ' · atrasada</span>' : venceLogo(i) ? '<span class="gp-vence">' + dataBR(i.prazo) + ' · ' + (diasAte(i) === 0 ? 'hoje' : 'em ' + diasAte(i) + (diasAte(i) === 1 ? ' dia' : ' dias')) + '</span>' : dataBR(i.prazo)) : (i.etapa === 'done' ? '-' : '<span class="gp-falta">sem prazo</span>')) + '</td><td>' + (i.pontos || '-') + '</td><td class="cf-mono">' + dataBR(i.created_at) + '</td><td class="cf-mono">' + dataBR(i.updated_at) + '</td></tr>'; }).join('') : '<tr><td colspan="' + (ed ? 12 : 11) + '" class="card-fraco">Nenhum item para estes filtros.</td></tr>') + '</tbody></table></div></div>';
     }
     $('gp-corpo').innerHTML = faixaSprint + barraFiltros() + corpo;
+  }
+
+  /* ---------- Resumo: como está a sprint, sem entrar em nada ---------- */
+  function gpResumo() {
+    var d = GP.d, sa = sprintAtiva();
+    var lista = sa ? itensDaSprint(sa.id) : (d.itens || []).filter(function (i) { return TIPO_CARTAO[i.tipo] && i.etapa !== 'backlog'; });
+    var feitos = lista.filter(function (i) { return i.etapa === 'done'; });
+    var atrasados = lista.filter(atrasado);
+    var bloqueados = lista.filter(function (i) { return i.sinalizado && i.etapa !== 'done'; });
+    var retrab = lista.filter(function (i) { return i.etapa === 'rework'; });
+    var soma = function (l) { return l.reduce(function (t, i) { return t + (Number(i.pontos) || 0); }, 0); };
+    var pct = lista.length ? Math.round(feitos.length * 100 / lista.length) : 0;
+
+    var cab;
+    if (sa) {
+      var dias = Math.ceil((Date.parse(String(sa.fim).slice(0, 10) + 'T12:00:00') - Date.parse(hojeISO() + 'T12:00:00')) / 86400000);
+      cab = '<section class="rs-sprint"><div><h2>' + esc(sa.nome) + '</h2><p class="rs-sprint-d">' + esc(dataBR(sa.inicio)) + ' a ' + esc(dataBR(sa.fim)) + (sa.objetivo ? ' · objetivo: ' + esc(sa.objetivo) : '') + '</p></div>' +
+        '<span class="selo' + (dias < 0 ? ' selo-alerta' : ' selo-acento') + '">' + (dias < 0 ? 'Encerrou há ' + (-dias) + (dias === -1 ? ' dia' : ' dias') : dias === 0 ? 'Encerra hoje' : 'Faltam ' + dias + (dias === 1 ? ' dia' : ' dias')) + '</span>' +
+        '<div class="rs-sprint-p"><span class="rs-barra"><i style="width:' + pct + '%"></i></span><span class="rs-sprint-d"><b>' + feitos.length + ' de ' + lista.length + '</b> itens · ' + soma(feitos) + ' de ' + soma(lista) + ' de esforço</span></div></section>';
+    } else {
+      cab = '<section class="rs-sprint"><div><h2>Sem sprint em andamento</h2><p class="rs-sprint-d">' + (d.app.modo === 'scrum' ? 'Monte a próxima em Sprints e versões. Os números abaixo são de todo o aplicativo.' : 'Este aplicativo roda em Kanban. Os números abaixo são de todo o aplicativo.') + '</p></div><span class="selo">Kanban</span>' +
+        '<div class="rs-sprint-p"><span class="rs-barra"><i style="width:' + pct + '%"></i></span><span class="rs-sprint-d"><b>' + feitos.length + ' de ' + lista.length + '</b> itens fora do backlog</span></div></section>';
+    }
+
+    var num = function (c, v, r) { return '<div class="rs-n" data-c="' + c + '"><b>' + v + '</b><span>' + r + '</span></div>'; };
+    var nums = '<div class="rs-nums">' +
+      num('neutro', lista.length, sa ? 'itens na sprint' : 'itens em andamento') +
+      num('verde', feitos.length, 'concluídos') +
+      num('vermelho', atrasados.length, atrasados.length === 1 ? 'atrasado' : 'atrasados') +
+      num('amarelo', bloqueados.length, bloqueados.length === 1 ? 'bloqueado' : 'bloqueados') +
+      num('brilho', retrab.length, 'em retrabalho') + '</div>';
+
+    var fluxo = '<section class="rs-cx"><div class="rs-cx-topo">' + ic('chart-line') + '<h3>Onde está cada item</h3></div><div class="rs-cx-corpo">' +
+      ETAPAS_QUADRO.map(function (e) {
+        var n = lista.filter(function (i) { return i.etapa === e; }).length;
+        return '<div class="rs-f" data-e="' + esc(e) + '"><span class="rs-f-r">' + esc(ETQ[e]) + '</span><span class="rs-f-b"><i style="width:' + (lista.length ? Math.round(n * 100 / lista.length) : 0) + '%"></i></span><span class="rs-f-n">' + n + '</span></div>';
+      }).join('') + '</div></section>';
+
+    var abertos = lista.filter(function (i) { return i.etapa !== 'done'; });
+    var porPessoa = {};
+    abertos.forEach(function (i) { var k = i.responsavel_id || '-'; (porPessoa[k] = porPessoa[k] || { n: 0, p: 0 }); porPessoa[k].n++; porPessoa[k].p += Number(i.pontos) || 0; });
+    var maior = Object.keys(porPessoa).reduce(function (m, k) { return Math.max(m, porPessoa[k].n); }, 0) || 1;
+    var carga = '<section class="rs-cx"><div class="rs-cx-topo">' + ic('users') + '<h3>Carga por pessoa</h3></div><div class="rs-cx-corpo">' +
+      (Object.keys(porPessoa).length ? Object.keys(porPessoa).sort(function (a, b) { return porPessoa[b].n - porPessoa[a].n; }).map(function (k) {
+        var nome = k === '-' ? 'Sem responsável' : (nomeDe(d.pessoas, k) || 'Pessoa sem nome');
+        return '<div class="rs-p"><span class="avatar" style="margin:0' + (k === '-' ? ';background:var(--sup-2);color:var(--fraco)' : '') + '">' + esc(k === '-' ? '—' : iniciais(nome)) + '</span>' +
+          '<span><b>' + esc(nome) + '</b><span class="rs-p-b" style="margin-top:4px"><i style="width:' + Math.round(porPessoa[k].n * 100 / maior) + '%"></i></span></span>' +
+          '<span class="card-fraco">' + porPessoa[k].n + ' aberto' + (porPessoa[k].n === 1 ? '' : 's') + (porPessoa[k].p ? ' · ' + porPessoa[k].p : '') + '</span></div>';
+      }).join('') : '<p class="card-fraco">Nada em aberto.</p>') + '</div></section>';
+
+    var trava = [].concat(
+      atrasados.map(function (i) { return { i: i, ic: 'clock', q: Math.abs(diasAte(i)) + (Math.abs(diasAte(i)) === 1 ? ' dia' : ' dias'), cor: 'var(--acento-texto)' }; }),
+      bloqueados.filter(function (i) { return !atrasado(i); }).map(function (i) { return { i: i, ic: 'triangle-alert', q: 'bloqueado', cor: '' }; }),
+      retrab.filter(function (i) { return !atrasado(i) && !i.sinalizado; }).map(function (i) { return { i: i, ic: 'arrow-up-down', q: 'voltou', cor: '' }; })
+    );
+    var secTrava = '<section class="rs-cx"><div class="rs-cx-topo">' + ic('triangle-alert') + '<h3>O que trava a sprint</h3>' + (trava.length ? '<span class="selo">' + trava.length + '</span>' : '') + '</div><div class="rs-cx-corpo" style="gap:0">' +
+      (trava.length ? trava.map(function (t) {
+        return '<div class="rs-lin"><span' + (t.cor ? ' style="color:' + t.cor + '"' : '') + '>' + ic(t.ic) + '</span><button class="gp-txt-btn gp-cresce" type="button" data-gp-abrir="' + esc(t.i.id) + '"><span class="gp-chave">' + esc(t.i.chave) + '</span> ' + esc(t.i.titulo) + '</button><span class="card-fraco"' + (t.cor ? ' style="color:' + t.cor + '"' : '') + '>' + esc(t.q) + '</span></div>';
+      }).join('') : '<p class="card-fraco">Nada travado. Pode tocar o que foi planejado.</p>') + '</div></section>';
+
+    var secFeito = '<section class="rs-cx"><div class="rs-cx-topo">' + ic('circle-check') + '<h3>Concluído' + (sa ? ' nesta sprint' : '') + '</h3>' + (feitos.length ? '<span class="selo">' + feitos.length + '</span>' : '') + '</div><div class="rs-cx-corpo" style="gap:0">' +
+      (feitos.length ? feitos.slice(0, 8).map(function (i) {
+        return '<div class="rs-lin"><span style="color:var(--verde)">' + ic('check') + '</span><button class="gp-txt-btn gp-cresce" type="button" data-gp-abrir="' + esc(i.id) + '"><span class="gp-chave">' + esc(i.chave) + '</span> ' + esc(i.titulo) + '</button><span class="card-fraco">' + esc(i.concluido_em ? dataBR(i.concluido_em) : '') + '</span></div>';
+      }).join('') : '<p class="card-fraco">Nada concluído ainda.</p>') + '</div></section>';
+
+    $('gp-corpo').innerHTML = '<div class="rs">' + cab + nums + '<div class="rs-duas">' + fluxo + carga + secTrava + secFeito + '</div></div>';
+  }
+
+  /* ---------- Cronograma: linha do tempo por semana ---------- */
+  function gpCronograma() {
+    var d = GP.d, SEM = 8;
+    var hoje = new Date(hojeISO() + 'T12:00:00');
+    var base = new Date(hoje); base.setDate(base.getDate() - ((base.getDay() + 6) % 7) - 7);
+    var dataDe = function (v) { return v ? new Date(String(v).slice(0, 10) + 'T12:00:00') : null; };
+    var col = function (dt) { if (!dt) return null; var k = Math.floor((dt - base) / 604800000) + 1; return k < 1 ? 1 : k > SEM ? SEM : k; };
+    var rotulo = function (k) { var x = new Date(base); x.setDate(x.getDate() + (k - 1) * 7); return ('0' + x.getDate()).slice(-2) + '/' + ('0' + (x.getMonth() + 1)).slice(-2); };
+    var semanaHoje = col(hoje);
+
+    var cab = '<div class="cr-cab"><span>Item</span>' + Array.apply(null, Array(SEM)).map(function (_, k) {
+      return '<span' + (k + 1 === semanaHoje ? ' data-hoje' : '') + '>' + rotulo(k + 1) + '</span>';
+    }).join('') + '</div>';
+
+    function barra(i, sp) {
+      var fim = dataDe(i.prazo) || (sp ? dataDe(sp.fim) : null);
+      var ini = (sp ? dataDe(sp.inicio) : null) || dataDe(i.created_at);
+      var a = col(ini), b = col(fim);
+      if (!b) return '<span style="grid-column:1/-1;padding-left:8px" class="card-fraco">Sem prazo</span>';
+      if (!a || a > b) a = b;
+      var txt = ETQ[i.etapa] + (i.prazo ? ' · ' + (atrasado(i) ? 'venceu ' : '') + dataBR(i.prazo) : '');
+      return '<span style="grid-column:' + a + '/' + (b + 1) + ';padding-right:4px"><span class="cr-b" data-e="' + esc(i.etapa) + '"' + (atrasado(i) ? ' data-atrasado' : '') + '>' + esc(txt) + '</span></span>';
+    }
+    function linha(i, sp) {
+      return '<div class="cr-l"><span class="cr-nome"><span class="gp-tipo" data-t="' + esc(i.tipo) + '">' + esc(TIPO_N[i.tipo]) + '</span><span class="gp-chave">' + esc(i.chave) + '</span>' +
+        '<button class="gp-txt-btn gp-cresce" type="button" data-gp-abrir="' + esc(i.id) + '">' + esc(i.titulo) + '</button></span>' +
+        '<span class="cr-faixa">' + barra(i, sp) + '</span></div>';
+    }
+
+    var usados = {}, html = '';
+    (d.sprints || []).slice().sort(function (a, b) { return String(a.inicio).localeCompare(String(b.inicio)); }).forEach(function (sp) {
+      var l = (d.itens || []).filter(function (i) { return i.sprint_id === sp.id && TIPO_CARTAO[i.tipo]; });
+      if (!l.length) return;
+      l.forEach(function (i) { usados[i.id] = true; });
+      html += '<p class="cr-grupo">' + esc(sp.nome) + ' · ' + esc(dataBR(sp.inicio)) + ' a ' + esc(dataBR(sp.fim)) + '</p>' + l.map(function (i) { return linha(i, sp); }).join('');
+    });
+    var soltos = (d.itens || []).filter(function (i) { return TIPO_CARTAO[i.tipo] && !usados[i.id]; });
+    if (soltos.length) html += '<p class="cr-grupo">Sem sprint</p>' + soltos.map(function (i) { return linha(i, null); }).join('');
+    var vs = (d.versoes || []).filter(function (v) { return v.data_prevista || v.lancada_em; });
+    if (vs.length) html += '<p class="cr-grupo">Versões</p>' + vs.map(function (v) {
+      var k = col(dataDe(v.lancada_em || v.data_prevista));
+      return '<div class="cr-l"><span class="cr-nome"><span class="gp-tipo">Versão</span><span class="gp-cresce">' + esc(v.numero + (v.nome ? ' · ' + v.nome : '')) + '</span></span>' +
+        '<span class="cr-faixa"><span style="grid-column:' + k + '/' + (k + 1) + ';justify-self:start"><span class="cr-marco">' + esc(v.numero + ' · ' + dataBR(v.lancada_em || v.data_prevista)) + '</span></span></span></div>';
+    }).join('');
+
+    if (!html) html = '<p class="cr-pe" style="border:0;text-align:center;padding:32px">Nenhum item para posicionar na linha do tempo ainda.</p>';
+    $('gp-corpo').innerHTML = '<div class="cr"><div class="cr-rol"><div class="cr-grade">' + cab + html + '</div></div>' +
+      '<p class="cr-pe">A barra vai do começo da sprint até a data de entrega. Quando a data de início existir no banco, ela passa a mandar no começo de cada barra. Contorno vermelho marca o que passou do prazo.</p></div>';
   }
 
   /* ---------- épicos: o guarda-chuva e o que está dentro dele ---------- */
@@ -3034,6 +3233,19 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
     else if (acao === 'novo') gpAbrirItem(null, GP.f.epico && GP.f.epico !== 'sem' ? { pai_id: GP.f.epico } : null);
     else if (acao === 'novo-backlog') gpAbrirItem(null, { etapa: 'backlog', sprint_id: null });
     else if (acao === 'novo-no-epico') { var ep = jItem; $('gp-item').close(); gpAbrirItem(null, { pai_id: ep }); }
+    else if (acao === 'mais-vistas') {
+      var linhaAb = b.closest('.ab-linha'), velho = linhaAb.querySelector('.ab-menu');
+      if (velho) { velho.remove(); return; }
+      var m = document.createElement('div');
+      m.className = 'selecao-lista ab-menu';
+      var nEp = (GP.d.itens || []).filter(function (x) { return x.tipo === 'epico'; }).length;
+      m.innerHTML = VISTAS_MAIS.map(function (v) {
+        var n = v[0] === 'epicos' ? nEp : 0;
+        return '<button class="selecao-opcao" type="button" data-gp-vista="' + v[0] + '"><span class="selecao-opcao-rotulo">' + v[1] + '</span>' + (n ? '<span class="aba-n">' + n + '</span>' : '') + '</button>';
+      }).join('');
+      linhaAb.appendChild(m);
+      return;
+    }
     else if (acao === 'nova-sub') { var pi = jItem; $('gp-item').close(); gpAbrirItem(null, { tipo: 'subtarefa', pai_id: pi }); }
     else if (acao === 'add-ideia') anotarIdeia();
     else if (acao === 'add-sub') addSub();
