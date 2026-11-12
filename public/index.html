@@ -212,7 +212,9 @@ textarea.campo-input { min-height: 96px; padding: 10px var(--s-12); resize: vert
 .cf-topo h1 { font-size: var(--t-31); }
 .cf-topo p { margin-top: var(--s-4); }
 .cf-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-8); }
-.cf-busca { width: min(280px, 100%); }
+.cf-acoes { flex-wrap: nowrap; }
+.cf-busca { width: auto; flex: 1 1 200px; min-width: 150px; max-width: 280px; }
+@media (max-width: 760px) { .cf-acoes { flex-wrap: wrap; } .cf-busca { flex-basis: 100%; max-width: none; } }
 .cf-resumo { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-12); margin-top: var(--s-24); }
 .cf-kpi { display: grid; gap: var(--s-4); }
 .cf-kpi b { font-size: var(--t-31); line-height: 1; }
@@ -679,6 +681,156 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
 .gp-col-item { overflow-x: hidden; }
 .gp-col-item, .gp-janela .gp-sec, .gp-janela .gp-com, .gp-janela .gp-hist, .gp-janela .gp-lista > div, .gp-janela .gp-sub, .gp-janela .gp-crit { overflow-wrap: anywhere; word-break: break-word; min-width: 0; }
 .gp-janela .gp-com span, .gp-janela .gp-hist, .gp-janela .lnk-texto { overflow-wrap: anywhere; }
+
+/* ===== Épicos: o guarda-chuva e o que está dentro dele ===== */
+.ep-lista { display: grid; gap: var(--s-16); }
+.ep-bloco { border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); overflow: hidden; }
+.ep-cab { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8) var(--s-16); padding: var(--s-16); border-bottom: 1px solid var(--linha); align-items: center; }
+.ep-cab-1 { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-8); min-width: 0; }
+.ep-cab h2 { font-size: var(--t-16); overflow-wrap: anywhere; }
+.ep-prog { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s-12); }
+.ep-barra { height: 8px; border-radius: 999px; background: var(--sup-2); box-shadow: inset 0 0 0 1px var(--linha); overflow: hidden; }
+.ep-barra i { display: block; height: 100%; border-radius: inherit; background: var(--verde-metal); }
+.ep-prog small { font-size: var(--t-12); color: var(--fraco); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ep-filhos { display: grid; }
+.ep-f { display: grid; grid-template-columns: 16px 56px minmax(0, 1fr) auto auto; align-items: center; gap: var(--s-12); width: 100%; padding: var(--s-12) var(--s-16); border: 0; border-bottom: 1px solid var(--linha); background: none; text-align: left; font: inherit; color: var(--texto); cursor: pointer; transition: background var(--dur-rapida) var(--curva); }
+.ep-f:last-child { border-bottom: 0; }
+.ep-f:hover { background: var(--realce); }
+.ep-f .ico { width: 15px; height: 15px; color: var(--fraco); }
+.ep-f-t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ep-f-s { font-size: var(--t-12); color: var(--fraco); white-space: nowrap; }
+.ep-f-r { font-size: var(--t-12); color: var(--fraco); white-space: nowrap; }
+.ep-sub { grid-column: 3 / -1; display: flex; flex-wrap: wrap; gap: var(--s-8); padding: 0 0 var(--s-8) 0; }
+.ep-vazio { padding: var(--s-24) var(--s-16); color: var(--fraco); font-size: var(--t-14); text-align: center; }
+.ep-sem { opacity: 0.85; }
+.ep-sem .ep-cab { background: var(--sup-2); }
+.ep-lista { margin-top: var(--s-16); }
+.ep-cab h2 { font-size: var(--t-16); }
+.ep-cab h2 .gp-txt-btn { font: inherit; }
+.ep-cab h2 .gp-txt-btn:hover { text-decoration: underline; }
+.ep-f-subs { cursor: default; padding-top: 0; }
+.ep-f-subs:hover { background: none; }
+.ep-sub .gp-et { border: 0; cursor: pointer; }
+.ep-sub .gp-et:hover { text-decoration: underline; }
+@media (max-width: 767px) { .ep-f { grid-template-columns: 16px minmax(0, 1fr); } .ep-f > :nth-child(4), .ep-f > :nth-child(5) { grid-column: 2; } }
+
+/* ===== ficha do item: duas colunas, estilo Jira ===== */
+.gp-janela .janela-topo #gi-voltar { flex: none; }
+.gp-janela.gp-ficha-janela { width: min(1180px, 100vw); }
+#gp-item-corpo.gp-ficha { display: block; padding: 0; overflow-y: auto; }
+.fx-corpo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: var(--s-24); padding: var(--s-24); align-items: start; }
+.fx-esq { display: grid; gap: var(--s-24); align-content: start; min-width: 0; }
+.fx-dir { display: grid; gap: var(--s-16); align-content: start; min-width: 0; }
+.fx-tit { display: grid; gap: var(--s-12); }
+.fx-tit h1 { font-size: var(--t-31); overflow-wrap: anywhere; }
+.fx-tit-acoes { display: flex; flex-wrap: wrap; gap: var(--s-8); }
+.fx-tit-acoes:empty { display: none; }
+.fx-sec { display: grid; gap: var(--s-8); min-width: 0; }
+.fx-sec > h2 { font-size: var(--t-12); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fraco); }
+.fx-desc-txt { white-space: pre-wrap; overflow-wrap: anywhere; }
+.fx-vazio { font-size: var(--t-14); color: var(--fraco); }
+.fx-anexo { display: flex; align-items: center; justify-content: center; gap: var(--s-8); padding: var(--s-24); border: 1px dashed var(--borda); border-radius: var(--raio-c); color: var(--fraco); font-size: var(--t-14); }
+.fx-abas { display: flex; flex-wrap: wrap; gap: var(--s-4); border-bottom: 1px solid var(--linha); }
+.fx-abas button { height: 34px; padding: 0 var(--s-12); border: 0; border-radius: var(--raio-b) var(--raio-b) 0 0; background: none; font: 500 var(--t-14) / 1 var(--fonte); color: var(--fraco); cursor: pointer; }
+.fx-abas button:hover { color: var(--texto); }
+.fx-abas button[aria-selected="true"] { color: var(--texto); font-weight: 600; background: var(--realce); box-shadow: inset 0 -2px 0 var(--acento-texto); }
+.fx-fluxo { display: grid; gap: var(--s-12); padding-top: var(--s-12); }
+.fx-ev { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--s-12); }
+.fx-ev-i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: var(--sup-2); color: var(--fraco); }
+.fx-ev[data-t="com"] .fx-ev-i { background: var(--acento-claro); color: var(--acento-texto); }
+.fx-ev-c { display: grid; gap: 2px; min-width: 0; }
+.fx-ev-1 { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-8); }
+.fx-ev-q { font-weight: 600; font-size: var(--t-14); }
+.fx-ev-d { font-size: var(--t-12); color: var(--fraco); }
+.fx-ev-txt { font-size: var(--t-14); overflow-wrap: anywhere; white-space: pre-wrap; }
+.fx-bloco { border: 1px solid var(--linha); border-radius: var(--raio-c); overflow: hidden; }
+.fx-bloco-topo { display: flex; align-items: center; gap: var(--s-8); padding: var(--s-12) var(--s-16); border-bottom: 1px solid var(--linha); background: var(--sup-2); }
+.fx-bloco-topo h2 { flex: 1; font-size: var(--t-14); }
+.fx-campos { display: grid; gap: 0; }
+.fx-c { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: var(--s-12); align-items: center; padding: var(--s-8) var(--s-16); border-bottom: 1px solid var(--linha); font-size: var(--t-14); }
+.fx-c:last-child { border-bottom: 0; }
+.fx-c dt { color: var(--fraco); font-size: var(--t-12); }
+.fx-c dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.fx-pessoa { display: inline-flex; align-items: center; gap: var(--s-8); }
+.fx-nao { color: var(--fraco); }
+.gp-ficha .gp-sec, .gp-ficha .fc-bloco { display: grid; gap: var(--s-8); }
+.gp-ficha .gp-sec > h3 { font-size: var(--t-12); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fraco); }
+.gp-ficha #gi-crit .gp-sec { border: 1px solid var(--linha); border-radius: var(--raio-c); padding: var(--s-16); }
+@media (max-width: 1023px) { .fx-corpo { grid-template-columns: minmax(0, 1fr); } }
+/* ===== Visão geral ===== */
+.conteudo:has(> #tela-visao:not([hidden])) { padding: 0 var(--s-8); }
+.vg-tela { display: flex; flex-direction: column; gap: var(--s-16); padding-block: var(--s-8) var(--s-24); }
+.vg-topo { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-12); }
+.vg-topo h1 { font-size: var(--t-31); }
+.vg-topo p { color: var(--fraco); margin-top: var(--s-4); }
+
+/* faixa de números */
+.vg-faixa { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-12); }
+.vg-n { position: relative; display: grid; gap: var(--s-4); padding: var(--s-16); overflow: hidden; border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); }
+.vg-n::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--vg-faixa, var(--linha)); }
+.vg-n[data-c="verde"] { --vg-faixa: var(--verde-metal); --vg-cor: var(--verde); }
+.vg-n[data-c="amarelo"] { --vg-faixa: var(--amarelo); --vg-cor: var(--texto); }
+.vg-n[data-c="vermelho"] { --vg-faixa: var(--acento-metal); --vg-cor: var(--acento-texto); }
+.vg-n[data-c="neutro"] { --vg-faixa: var(--texto); --vg-cor: var(--texto); }
+.vg-n-r { font-size: var(--t-12); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fraco); }
+.vg-n-v { font-size: clamp(30px, 3.2vw, 44px); font-weight: var(--numero-peso); line-height: 1; letter-spacing: -0.02em; color: var(--vg-cor); font-variant-numeric: tabular-nums; }
+.vg-n-d { font-size: var(--t-12); color: var(--fraco); }
+
+/* corpo em duas colunas */
+.vg-corpo { display: grid; grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr); gap: var(--s-16); align-items: start; }
+.vg-col { display: grid; gap: var(--s-16); align-content: start; }
+.vg-painel { border-radius: var(--raio-c); background: var(--sup); box-shadow: var(--sombra); overflow: hidden; }
+.vg-painel-topo { display: flex; align-items: center; gap: var(--s-8); padding: var(--s-16); border-bottom: 1px solid var(--linha); }
+.vg-painel-topo h2 { flex: 1; font-size: var(--t-16); }
+.vg-painel-corpo { padding: var(--s-8) var(--s-16) var(--s-16); }
+
+/* lista "precisa de você" */
+.vg-grupo-t { display: flex; align-items: center; gap: var(--s-8); padding: var(--s-12) 0 var(--s-4); font: 600 11px / 1.2 var(--fonte); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fraco); }
+.vg-acao { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; gap: var(--s-12); width: 100%; padding: var(--s-12) 0; border: 0; border-bottom: 1px solid var(--linha); background: none; text-align: left; font: inherit; color: var(--texto); cursor: pointer; }
+.vg-acao:last-child { border-bottom: 0; }
+.vg-acao:hover .vg-acao-t { text-decoration: underline; }
+.vg-acao-i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--sup-2); color: var(--fraco); }
+.vg-acao[data-g="atrasado"] .vg-acao-i { background: var(--acento-claro); color: var(--acento-texto); }
+.vg-acao[data-g="bloqueado"] .vg-acao-i { background: rgb(255 235 0 / 0.35); color: var(--texto); }
+.vg-acao[data-g="crm"] .vg-acao-i { background: var(--verde-claro); color: var(--verde); }
+.vg-acao-c { display: grid; gap: 2px; min-width: 0; }
+.vg-acao-t { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vg-acao-d { font-size: var(--t-12); color: var(--fraco); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vg-acao-q { font-size: var(--t-12); font-weight: 600; white-space: nowrap; color: var(--fraco); }
+.vg-acao[data-g="atrasado"] .vg-acao-q { color: var(--acento-texto); }
+
+/* sprint */
+.vg-sprint-n { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-8); }
+.vg-sprint-n b { font-size: var(--t-31); font-weight: var(--numero-peso); line-height: 1; }
+.vg-sprint-n span { font-size: var(--t-12); color: var(--fraco); }
+.vg-prog { height: 10px; margin: var(--s-12) 0 var(--s-8); border-radius: 999px; background: var(--sup-2); box-shadow: inset 0 0 0 1px var(--linha); overflow: hidden; }
+.vg-prog i { display: block; height: 100%; border-radius: inherit; background: var(--verde-metal); }
+.vg-sprint-p { display: flex; justify-content: space-between; font-size: var(--t-12); color: var(--fraco); }
+
+/* fluxo */
+.vg-fluxo { display: grid; gap: var(--s-8); }
+.vg-f { display: grid; grid-template-columns: 76px minmax(0, 1fr) 28px; align-items: center; gap: var(--s-8); font-size: var(--t-12); }
+.vg-f-r { color: var(--fraco); }
+.vg-f-b { height: 18px; border-radius: 6px; background: var(--sup-2); overflow: hidden; }
+.vg-f-b i { display: block; height: 100%; background: var(--vg-f, var(--texto)); }
+.vg-f[data-e="to do"] { --vg-f: rgb(17 17 17 / 0.45); }
+.vg-f[data-e="progress"] { --vg-f: var(--amarelo); }
+.vg-f[data-e="review"] { --vg-f: var(--acento-metal); }
+.vg-f[data-e="rework"] { --vg-f: var(--acento-brilho); }
+.vg-f[data-e="done"] { --vg-f: var(--verde-metal); }
+.vg-f-n { font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* entregas */
+.vg-ent { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: var(--s-8); padding: var(--s-8) 0; border-bottom: 1px solid var(--linha); font-size: var(--t-14); }
+.vg-ent:last-child { border-bottom: 0; }
+.vg-ent .ico { width: 16px; height: 16px; color: var(--verde); }
+.vg-ent-t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vg-ent-q { font-size: var(--t-12); color: var(--fraco); white-space: nowrap; }
+
+@media (max-width: 1023px) {
+  .vg-corpo { grid-template-columns: minmax(0, 1fr); }
+  .vg-faixa { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 /* ===== CRM · Clientes e Atendimento ===== */
 .conteudo:has(> #tela-crm:not([hidden])) { display: flex; flex-direction: column; overflow: hidden; padding: var(--s-4); }
 #tela-crm { display: flex; flex-direction: column; flex: 1; min-height: 0; }
@@ -894,6 +1046,113 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
       </div>
     </section>
 
+    <!-- VG inicio -->
+    <section id="tela-visao" hidden aria-label="Visão geral">
+      <div class="vg-tela" data-entra>
+      <header class="vg-topo">
+        <div>
+          <h1 id="vg-ola">Visão geral</h1>
+          <p id="vg-data">1 aplicativo em produção</p>
+        </div>
+      </header>
+
+      <div class="vg-faixa">
+        <div class="vg-n" data-c="neutro"><span class="vg-n-r">Em andamento</span><b class="vg-n-v">7</b><span class="vg-n-d">itens fora do backlog</span></div>
+        <div class="vg-n" data-c="vermelho"><span class="vg-n-r">Atrasados</span><b class="vg-n-v">2</b><span class="vg-n-d">passaram do prazo</span></div>
+        <div class="vg-n" data-c="amarelo"><span class="vg-n-r">Na caixa de entrada</span><b class="vg-n-v">3</b><span class="vg-n-d">solicitações sem destino</span></div>
+        <div class="vg-n" data-c="verde"><span class="vg-n-r">Custos do mês</span><b class="vg-n-v">R$ 1.240</b><span class="vg-n-d">4 lançamentos</span></div>
+      </div>
+
+      <div class="vg-corpo">
+        <div class="vg-col">
+          <section class="vg-painel">
+            <div class="vg-painel-topo"><svg class="ico" aria-hidden="true"><use href="#circle-alert"/></svg><h2>Precisa de você</h2><span class="selo">7</span></div>
+            <div class="vg-painel-corpo">
+
+              <p class="vg-grupo-t">Passou do prazo</p>
+              <button class="vg-acao" type="button" data-g="atrasado">
+                <span class="vg-acao-i"><svg class="ico" aria-hidden="true"><use href="#clock"/></svg></span>
+                <span class="vg-acao-c"><span class="vg-acao-t">CD-1 · Teste da integração com o GitHub</span><span class="vg-acao-d">Review · Adrian · venceu 09/11</span></span>
+                <span class="vg-acao-q">3 dias</span>
+              </button>
+              <button class="vg-acao" type="button" data-g="atrasado">
+                <span class="vg-acao-i"><svg class="ico" aria-hidden="true"><use href="#clock"/></svg></span>
+                <span class="vg-acao-c"><span class="vg-acao-t">CD-4 · Corrigir cálculo do rateio</span><span class="vg-acao-d">Progress · Lucas · venceu 11/11</span></span>
+                <span class="vg-acao-q">1 dia</span>
+              </button>
+
+              <p class="vg-grupo-t">Parado esperando alguém</p>
+              <button class="vg-acao" type="button" data-g="bloqueado">
+                <span class="vg-acao-i"><svg class="ico" aria-hidden="true"><use href="#triangle-alert"/></svg></span>
+                <span class="vg-acao-c"><span class="vg-acao-t">CD-2 · Importar base antiga</span><span class="vg-acao-d">Aguarda acesso ao servidor · resolve: Lucas</span></span>
+                <span class="vg-acao-q">há 4 dias</span>
+              </button>
+              <button class="vg-acao" type="button" data-g="bloqueado">
+                <span class="vg-acao-i"><svg class="ico" aria-hidden="true"><use href="#arrow-up-down"/></svg></span>
+                <span class="vg-acao-c"><span class="vg-acao-t">CD-6 · Voltou para retrabalho</span><span class="vg-acao-d">Saiu de Review por falha no cálculo</span></span>
+                <span class="vg-acao-q">ontem</span>
+              </button>
+
+              <p class="vg-grupo-t">Chegou de fora</p>
+              <button class="vg-acao" type="button" data-g="crm">
+                <span class="vg-acao-i"><svg class="ico" aria-hidden="true"><use href="#message-circle"/></svg></span>
+                <span class="vg-acao-c"><span class="vg-acao-t">3 solicitações novas no Atendimento</span><span class="vg-acao-d">Adrian (2) e Lucas (1) · uma com urgência alta</span></span>
+                <span class="vg-acao-q">Abrir</span>
+              </button>
+
+              <p class="vg-grupo-t">Vence em breve</p>
+              <button class="vg-acao" type="button" data-g="cofre">
+                <span class="vg-acao-i"><svg class="ico" aria-hidden="true"><use href="#lock"/></svg></span>
+                <span class="vg-acao-c"><span class="vg-acao-t">Certificado digital · Meridiano</span><span class="vg-acao-d">Cofre · vence 17/11</span></span>
+                <span class="vg-acao-q">5 dias</span>
+              </button>
+              <button class="vg-acao" type="button" data-g="cofre">
+                <span class="vg-acao-i"><svg class="ico" aria-hidden="true"><use href="#calendar"/></svg></span>
+                <span class="vg-acao-c"><span class="vg-acao-t">Sprint 3 encerra sexta</span><span class="vg-acao-d">3 itens ainda abertos</span></span>
+                <span class="vg-acao-q">2 dias</span>
+              </button>
+
+            </div>
+          </section>
+        </div>
+
+        <div class="vg-col">
+          <section class="vg-painel">
+            <div class="vg-painel-topo"><svg class="ico" aria-hidden="true"><use href="#play"/></svg><h2>Sprint 3</h2><span class="selo">em andamento</span></div>
+            <div class="vg-painel-corpo">
+              <div class="vg-sprint-n"><b>5 de 8</b><span>itens concluídos</span></div>
+              <div class="vg-prog"><i style="width:62%"></i></div>
+              <div class="vg-sprint-p"><span>Começou 03/11</span><span>Faltam 2 dias</span></div>
+            </div>
+          </section>
+
+          <section class="vg-painel">
+            <div class="vg-painel-topo"><svg class="ico" aria-hidden="true"><use href="#chart-line"/></svg><h2>Fluxo agora</h2></div>
+            <div class="vg-painel-corpo">
+              <div class="vg-fluxo">
+                <div class="vg-f" data-e="to do"><span class="vg-f-r">To Do</span><span class="vg-f-b"><i style="width:40%"></i></span><span class="vg-f-n">4</span></div>
+                <div class="vg-f" data-e="progress"><span class="vg-f-r">Progress</span><span class="vg-f-b"><i style="width:30%"></i></span><span class="vg-f-n">3</span></div>
+                <div class="vg-f" data-e="review"><span class="vg-f-r">Review</span><span class="vg-f-b"><i style="width:20%"></i></span><span class="vg-f-n">2</span></div>
+                <div class="vg-f" data-e="rework"><span class="vg-f-r">Rework</span><span class="vg-f-b"><i style="width:10%"></i></span><span class="vg-f-n">1</span></div>
+                <div class="vg-f" data-e="done"><span class="vg-f-r">Done</span><span class="vg-f-b"><i style="width:90%"></i></span><span class="vg-f-n">9</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="vg-painel">
+            <div class="vg-painel-topo"><svg class="ico" aria-hidden="true"><use href="#circle-check"/></svg><h2>Entregue nos últimos 7 dias</h2></div>
+            <div class="vg-painel-corpo">
+              <div class="vg-ent"><svg class="ico" aria-hidden="true"><use href="#check"/></svg><span class="vg-ent-t">CD-9 · Exportar tabela em Excel</span><span class="vg-ent-q">ontem</span></div>
+              <div class="vg-ent"><svg class="ico" aria-hidden="true"><use href="#check"/></svg><span class="vg-ent-t">CD-7 · Filtros do quadro</span><span class="vg-ent-q">há 3 dias</span></div>
+              <div class="vg-ent"><svg class="ico" aria-hidden="true"><use href="#check"/></svg><span class="vg-ent-t">CD-5 · Etapa de retrabalho</span><span class="vg-ent-q">há 5 dias</span></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    </section>
+    <!-- VG fim -->
+
     <!-- CRM inicio -->
     <section id="tela-crm" hidden aria-label="CRM">
       <!-- 1 · CRM: só as duas caixas -->
@@ -1069,7 +1328,7 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
 
 
 <dialog class="janela gp-janela" id="gp-item" aria-labelledby="gp-item-tit">
-  <div class="janela-topo"><h2 id="gp-item-tit">Item</h2><button class="btn btn-fantasma btn-icone" type="button" data-fechar aria-label="Fechar"><svg class="ico" aria-hidden="true"><use href="#x"/></svg></button></div>
+  <div class="janela-topo"><button class="btn btn-2 btn-p" type="button" id="gi-voltar"><svg class="ico" aria-hidden="true"><use href="#chevron-left"/></svg>Voltar</button><h2 id="gp-item-tit">Item</h2><button class="btn btn-fantasma btn-icone" type="button" data-fechar aria-label="Fechar"><svg class="ico" aria-hidden="true"><use href="#x"/></svg></button></div>
   <div class="janela-corpo" id="gp-item-corpo"></div>
   <div class="janela-pe"><button class="btn btn-fantasma" type="button" id="gi-arquivar"><svg class="ico" aria-hidden="true"><use href="#archive"/></svg>Arquivar</button><button class="btn btn-fantasma" type="button" id="gi-cancelar">Fechar</button><button class="btn btn-2" type="button" id="gi-editar"><svg class="ico" aria-hidden="true"><use href="#pencil"/></svg>Editar</button><button class="btn" type="button" id="gi-salvar">Salvar</button></div>
 </dialog>
@@ -1303,11 +1562,13 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
     itens.forEach(function (a) { if (a.getAttribute('href') === modulo) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('tela-cofre').hidden = h !== '#cofre'; $('tela-op').hidden = h !== '#operacoes'; $('tela-op-sub').hidden = !SUB[h];
     $('tela-crm').hidden = h !== '#crm';
-    $('tela-vazia').hidden = !!(h === '#cofre' || h === '#operacoes' || h === '#crm' || SUB[h]);
+    $('tela-visao').hidden = h !== '#visao-geral';
+    $('tela-vazia').hidden = !!(h === '#cofre' || h === '#operacoes' || h === '#crm' || h === '#visao-geral' || SUB[h]);
     $('tela-vazia-txt').textContent = (NOMES[h] || '') + ': ainda sem conteúdo.';
     if (h === '#cofre') { entrar($('tela-cofre').firstElementChild); if (!carregou) carregar(); }
     if (h === '#operacoes') { entrar($('tela-op').firstElementChild); carregarOp(); }
     if (h === '#crm') crmEntrar();
+    if (h === '#visao-geral') vgEntrar();
     if (SUB[h]) { var ehAtivo = h === '#ativo'; $('op-sub-titulo').textContent = ehAtivo ? '' : SUB[h]; $('op-sub-titulo').hidden = ehAtivo; $('gp').hidden = !ehAtivo; if (ehAtivo) gpEntrar(); else $('op-voltar').focus(); }
   }
   window.addEventListener('hashchange', rota);
@@ -1864,15 +2125,16 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
   function gpCarregarApp() { return sql(Q.quadro(GP.app.id)).then(function (rows) { GP.d = obj(rows); sql(Q.filtros()).then(function (fs) { GP.filtrosSalvos = fs || []; }).catch(function () {}); return GP.d; }); }
   function recarregarTudo() { return gpCarregarApp().then(function () { gpDesenharApp(); sql(Q.listaApps()).then(function (r) { GP.apps = r; desenharListaApps(); }).catch(function () {}); }); }
 
-  var VISTAS = [['quadro', 'Quadro'], ['backlog', 'Backlog e ideias'], ['tabela', 'Tabela'], ['ritos', 'Sprints e versões'], ['equipe', 'Equipe e indicadores'], ['integracoes', 'Integrações']];
+  var VISTAS = [['quadro', 'Quadro'], ['backlog', 'Backlog e ideias'], ['epicos', 'Épicos'], ['tabela', 'Tabela'], ['ritos', 'Sprints e versões'], ['equipe', 'Equipe e indicadores'], ['integracoes', 'Integrações']];
   function gpDesenharApp() {
-    var d = GP.d, a = d.app, nIdeias = d.itens.filter(function (i) { return i.tipo === 'ideia'; }).length, nBack = d.itens.filter(function (i) { return i.etapa === 'backlog' && i.tipo !== 'ideia' && i.tipo !== 'subtarefa'; }).length;
+    var d = GP.d, a = d.app, nIdeias = d.itens.filter(function (i) { return i.tipo === 'ideia'; }).length, nBack = d.itens.filter(function (i) { return i.etapa === 'backlog' && i.tipo !== 'ideia' && i.tipo !== 'subtarefa'; }).length, nEpicos = d.itens.filter(function (i) { return i.tipo === 'epico'; }).length;
     $('gp-cab').innerHTML = '<header class="gp-topo"><div><p class="gp-trilha">' + esc(a.projeto) + ' ' + ic('chevron-right') + ' <span class="gp-chave">' + esc(a.prefixo) + '</span></p><h1>' + esc(a.nome) + '</h1></div>' +
       '<div class="gp-acoes"><div class="seg-modo" role="group" aria-label="Modo do quadro"><button type="button" data-gp-modo="kanban" aria-pressed="' + (a.modo !== 'scrum') + '">Kanban</button><button type="button" data-gp-modo="scrum" aria-pressed="' + (a.modo === 'scrum') + '">Scrum</button></div>' +
       '<button class="btn btn-2 btn-icone" type="button" data-gp="recarregar" aria-label="Recarregar" title="Recarregar">' + ic('refresh-cw') + '</button><button class="btn" type="button" data-gp="novo">' + ic('plus') + 'Item</button></div></header>' +
-      '<div class="abas-luz" role="tablist" aria-label="Vistas do aplicativo">' + VISTAS.map(function (v) { var n = v[0] === 'backlog' ? nIdeias + nBack : 0; return '<button role="tab" type="button" data-gp-vista="' + v[0] + '" aria-selected="' + (GP.vista === v[0]) + '"' + (GP.vista === v[0] ? '' : ' tabindex="-1"') + '>' + v[1] + (n ? ' <span class="aba-n">' + n + '</span>' : '') + '</button>'; }).join('') + '</div>';
+      '<div class="abas-luz" role="tablist" aria-label="Vistas do aplicativo">' + VISTAS.map(function (v) { var n = v[0] === 'backlog' ? nIdeias + nBack : v[0] === 'epicos' ? nEpicos : 0; return '<button role="tab" type="button" data-gp-vista="' + v[0] + '" aria-selected="' + (GP.vista === v[0]) + '"' + (GP.vista === v[0] ? '' : ' tabindex="-1"') + '>' + v[1] + (n ? ' <span class="aba-n">' + n + '</span>' : '') + '</button>'; }).join('') + '</div>';
     if (GP.vista === 'quadro' || GP.vista === 'tabela') gpDesenharItens();
     else if (GP.vista === 'backlog') gpBacklog();
+    else if (GP.vista === 'epicos') gpEpicos();
     else if (GP.vista === 'ritos') gpRitos();
     else if (GP.vista === 'equipe') gpEquipe();
     else gpIntegracoes();
@@ -1880,6 +2142,23 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
   function sprintAtiva() { return (GP.d.sprints || []).filter(function (s) { return s.situacao === 'ativa'; })[0] || null; }
   function subtarefasDe(id) { return GP.d.itens.filter(function (x) { return x.tipo === 'subtarefa' && x.pai_id === id; }); }
   function epicos() { return GP.d.itens.filter(function (x) { return x.tipo === 'epico'; }); }
+  // escada: Épico > História > Tarefa/Bug/Melhoria > Subtarefa.
+  // A subtarefa pendura em História ou Tarefa; a tarefa pendura em História ou direto no Épico.
+  function paisPossiveis(tipo, euId) {
+    if (tipo === 'epico' || tipo === 'ideia' || tipo === 'subtarefa') return [];
+    return (GP.d.itens || []).filter(function (x) {
+      if (x.id === euId) return false;
+      if (x.tipo === 'epico') return true;
+      return tipo !== 'historia' && x.tipo === 'historia';
+    }).sort(function (a, b) {
+      if (a.tipo !== b.tipo) return a.tipo === 'epico' ? -1 : 1;
+      return String(a.chave).localeCompare(String(b.chave), 'pt', { numeric: true });
+    });
+  }
+  function rotuloPai(tipo) { return tipo === 'historia' ? 'Épico' : 'Pai (épico ou história)'; }
+  function opcoesPai(tipo, euId, atual) {
+    return opcoes(paisPossiveis(tipo, euId), atual, 'Sem pai', function (x) { return TIPO_N[x.tipo] + ' · ' + x.chave + ' · ' + x.titulo; });
+  }
   function diasAte(i) { if (!i.prazo) return null; return Math.ceil((Date.parse(String(i.prazo).slice(0, 10) + 'T12:00:00') - Date.parse(hojeISO() + 'T12:00:00')) / 86400000); }
   function venceLogo(i) { var d = diasAte(i); return d !== null && d >= 0 && d <= 7 && i.etapa !== 'done'; }
   function itensVisiveis() {
@@ -1896,7 +2175,8 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
       if (f.epico && (f.epico === 'sem' ? i.pai_id : i.pai_id !== f.epico)) return false;
       if (f.nivel === 'principais' && (i.tipo === 'subtarefa' || i.tipo === 'epico')) return false;
       if (f.nivel === 'subtarefas' && i.tipo !== 'subtarefa') return false;
-      if (f.nivel === 'epicos' && i.tipo !== 'epico') return false;
+      if (f.nivel === 'epicos' && !tabela) { /* épicos têm aba própria; o nível não vale fora da tabela */ }
+      else if (f.nivel === 'epicos' && i.tipo !== 'epico') return false;
       if (f.situacao === 'atrasadas' && !atrasado(i)) return false;
       if (f.situacao === 'vencendo' && !venceLogo(i)) return false;
       if (f.situacao === 'sem-resp' && i.responsavel_id) return false;
@@ -2030,6 +2310,60 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
         (ordenada.length ? ordenada.map(function (i) { var pai = i.tipo === 'subtarefa' ? d.itens.filter(function (x) { return x.id === i.pai_id; })[0] : null; return '<tr' + (ed ? '' : ' tabindex="0" data-gp-abrir="' + esc(i.id) + '"') + '>' + (ed ? '<td><input type="checkbox" class="gp-marca" data-gp-sel="' + esc(i.id) + '"' + (GP.sel[i.id] ? ' checked' : '') + ' aria-label="Marcar ' + esc(i.chave) + '"></td>' : '') + '<td class="gp-chave">' + (ed ? '<button class="gp-txt-btn lnk-texto" type="button" data-gp-abrir="' + esc(i.id) + '">' + esc(i.chave) + '</button>' : esc(i.chave)) + '</td><td>' + (pai ? '<span class="card-fraco">' + esc(pai.chave) + ' › </span>' : '') + (ed ? '<input class="campo-input gp-cel gp-cel-txt" data-gp-cel="titulo" data-gp-id="' + esc(i.id) + '" value="' + esc(i.titulo) + '" maxlength="300" aria-label="Título">' : esc(i.titulo)) + (i.sinalizado ? ' <span class="gp-tipo" data-t="bug">Bloqueada</span>' : '') + '</td><td><span class="gp-tipo" data-t="' + esc(i.tipo) + '">' + esc(TIPO_N[i.tipo]) + '</span></td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="etapa" data-gp-id="' + esc(i.id) + '" aria-label="Etapa">' + opcoesFixas(ETQ, i.etapa) + '</select>' : esc(ETQ[i.etapa])) + '</td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="prioridade" data-gp-id="' + esc(i.id) + '" aria-label="Prioridade">' + opcoesFixas(PRIO_N, i.prioridade) + '</select>' : '<span class="gp-tipo gp-prio" data-p="' + esc(i.prioridade) + '">' + esc(PRIO_N[i.prioridade]) + '</span>') + '</td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="tipo_frente_id" data-gp-id="' + esc(i.id) + '" aria-label="Frente">' + opcoes(d.frentes, i.tipo_frente_id, 'Sem frente') + '</select>' : esc(nomeDe(d.frentes, i.tipo_frente_id))) + '</td><td>' + (ed ? '<select class="campo-input gp-cel" data-gp-cel="responsavel_id" data-gp-id="' + esc(i.id) + '" aria-label="Responsável">' + opcoes(d.pessoas, i.responsavel_id, 'Sem responsável') + '</select>' : nomeDe(d.pessoas, i.responsavel_id) ? esc(nomeDe(d.pessoas, i.responsavel_id)) : '<span class="gp-falta">sem responsável</span>') + '</td><td class="cf-mono">' + (ed ? '<input class="campo-input gp-cel" type="date" data-gp-cel="prazo" data-gp-id="' + esc(i.id) + '" value="' + esc(i.prazo ? String(i.prazo).slice(0, 10) : '') + '" aria-label="Prazo">' : i.prazo ? (atrasado(i) ? '<span class="gp-atr">' + dataBR(i.prazo) + ' · atrasada</span>' : venceLogo(i) ? '<span class="gp-vence">' + dataBR(i.prazo) + ' · ' + (diasAte(i) === 0 ? 'hoje' : 'em ' + diasAte(i) + (diasAte(i) === 1 ? ' dia' : ' dias')) + '</span>' : dataBR(i.prazo)) : (i.etapa === 'done' ? '-' : '<span class="gp-falta">sem prazo</span>')) + '</td><td>' + (i.pontos || '-') + '</td><td class="cf-mono">' + dataBR(i.created_at) + '</td><td class="cf-mono">' + dataBR(i.updated_at) + '</td></tr>'; }).join('') : '<tr><td colspan="' + (ed ? 12 : 11) + '" class="card-fraco">Nenhum item para estes filtros.</td></tr>') + '</tbody></table></div></div>';
     }
     $('gp-corpo').innerHTML = faixaSprint + barraFiltros() + corpo;
+  }
+
+  /* ---------- épicos: o guarda-chuva e o que está dentro dele ---------- */
+  function gpEpicos() {
+    var d = GP.d;
+    var eps = (d.itens || []).filter(function (i) { return i.tipo === 'epico'; })
+      .sort(function (a, b) { return String(a.chave).localeCompare(String(b.chave), 'pt', { numeric: true }); });
+    var filhosDe = function (id) { return (d.itens || []).filter(function (x) { return x.pai_id === id && x.tipo !== 'epico'; }); };
+    var soltos = (d.itens || []).filter(function (i) { return TIPO_CARTAO[i.tipo] && !i.pai_id; });
+
+    function linhaFilho(i) {
+      var subs = subtarefasDe(i.id), feitas = subs.filter(function (x) { return x.etapa === 'done'; }).length;
+      var icone = i.etapa === 'done' ? 'circle-check' : i.etapa === 'rework' ? 'triangle-alert' : 'file-text';
+      return '<button class="ep-f" type="button" data-gp-abrir="' + esc(i.id) + '">' + ic(icone) +
+        '<span class="gp-chave">' + esc(i.chave) + '</span>' +
+        '<span class="ep-f-t">' + esc(i.titulo) + '</span>' +
+        etiquetaEtapa(i.etapa) +
+        '<span class="ep-f-r">' + esc(nomeDeUsuario(i.responsavel_id) || 'Sem responsável') + '</span>' +
+        '</button>' +
+        (subs.length ? '<div class="ep-f ep-f-subs"><span></span><span></span><span class="ep-sub">' + subs.map(function (x) {
+          return '<button class="gp-et" type="button" data-gp-abrir="' + esc(x.id) + '"' + (x.etapa === 'done' ? ' data-e="done"' : '') + '>' + esc(x.chave + ' · ' + x.titulo) + '</button>';
+        }).join('') + '</span><span class="ep-f-s">' + feitas + '/' + subs.length + '</span><span></span></div>' : '');
+    }
+
+    function bloco(ep) {
+      var fs = filhosDe(ep.id), feitos = fs.filter(function (x) { return x.etapa === 'done'; }).length;
+      var pct = fs.length ? Math.round(feitos * 100 / fs.length) : 0;
+      var sp = ep.sprint_id ? nomeDe(d.sprints, ep.sprint_id) : '';
+      var lado = [sp, ep.prazo ? 'vence ' + dataBR(ep.prazo) : ''].filter(Boolean).join(' · ');
+      return '<section class="ep-bloco">' +
+        '<div class="ep-cab"><div class="ep-cab-1">' +
+          '<span class="gp-chave">' + esc(ep.chave) + '</span>' +
+          '<span class="gp-tipo" data-t="epico">' + TIPO_N.epico + '</span>' +
+          '<h2><button class="gp-txt-btn" type="button" data-gp-abrir="' + esc(ep.id) + '">' + esc(ep.titulo) + '</button></h2>' +
+          etiquetaEtapa(ep.etapa) +
+        '</div>' +
+        '<span class="card-fraco">' + esc(lado) + '</span>' +
+        '<div class="ep-prog"><span class="ep-barra"><i style="width:' + pct + '%"></i></span><small>' +
+          (fs.length ? feitos + ' de ' + fs.length + (fs.length === 1 ? ' concluído' : ' concluídos') : 'nada dentro ainda') +
+        '</small></div></div>' +
+        (fs.length
+          ? '<div class="ep-filhos">' + fs.map(linhaFilho).join('') + '</div>'
+          : '<p class="ep-vazio">Nenhum item neste épico. Abra um item e escolha <b>' + esc(ep.chave) + '</b> no campo Épico, ou crie um já dentro dele.</p>');
+    }
+
+    var html = eps.length ? eps.map(bloco).join('') :
+      '<section class="ep-bloco"><p class="ep-vazio">Nenhum épico neste aplicativo ainda. Crie um item do tipo <b>Épico</b> para agrupar histórias e tarefas dentro dele.</p></section>';
+
+    if (soltos.length) {
+      html += '<section class="ep-bloco ep-sem"><div class="ep-cab"><div class="ep-cab-1"><h2>Sem épico</h2></div>' +
+        '<span class="card-fraco">' + soltos.length + (soltos.length === 1 ? ' item solto' : ' itens soltos') + '</span></div>' +
+        '<div class="ep-filhos">' + soltos.map(linhaFilho).join('') + '</div></section>';
+    }
+    $('gp-corpo').innerHTML = '<div class="ep-lista">' + html + '</div>';
   }
 
   /* ---------- backlog e ideias ---------- */
@@ -2198,42 +2532,69 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
     var base = { tipo: 'tarefa', etapa: d.app.modo === 'scrum' && !sa ? 'backlog' : 'to do', prioridade: 'media', sprint_id: d.app.modo === 'scrum' && sa ? sa.id : null };
     var v = i || Object.assign(base, novo || {});
     if (v.tipo === 'ideia' || v.tipo === 'epico') v.etapa = v.tipo === 'ideia' ? 'backlog' : v.etapa;
-    var ehSub = v.tipo === 'subtarefa', pai = ehSub ? d.itens.filter(function (x) { return x.id === v.pai_id; })[0] : null;
+    var ehSub = v.tipo === 'subtarefa', pai = v.pai_id ? d.itens.filter(function (x) { return x.id === v.pai_id; })[0] : null;
     var tiposPossiveis = ehSub ? ['subtarefa'] : ['historia', 'tarefa', 'bug', 'melhoria', 'epico', 'ideia'];
     $('gp-item-tit').textContent = i ? i.chave + ' · ' + i.titulo : (ehSub ? 'Nova subtarefa de ' + (pai ? pai.chave : '') : 'Novo item em ' + d.app.nome);
-    var trilha = pai ? '<p class="gp-trilha" style="margin-bottom:12px">Dentro de <button class="lnk-texto gp-txt-btn" type="button" data-gp-abrir="' + esc(pai.id) + '">' + esc(pai.chave + ' · ' + pai.titulo) + '</button></p>' : '';
+    var trilha = pai ? '<p class="gp-trilha" style="margin-bottom:12px">Dentro de <span class="gp-tipo" data-t="' + esc(pai.tipo) + '">' + esc(TIPO_N[pai.tipo]) + '</span> <button class="lnk-texto gp-txt-btn" type="button" data-gp-abrir="' + esc(pai.id) + '">' + esc(pai.chave + ' · ' + pai.titulo) + '</button></p>' : '';
     $('gi-editar').hidden = jEdita; $('gi-salvar').hidden = !jEdita; $('gi-arquivar').hidden = !(i && jEdita); $('gi-cancelar').textContent = jEdita ? 'Cancelar' : 'Fechar';
     $('gi-salvar').textContent = i ? 'Salvar' : 'Criar';
     if (!jEdita) {
-      var cx = function (v) { return '<span class="gp-cx">' + v + '</span>'; };
-      var par = function (r, val) { return '<div><span class="campo-rotulo">' + r + '</span>' + val + '</div>'; };
-      var ep = !ehSub && i.pai_id ? d.itens.filter(function (x) { return x.id === i.pai_id; })[0] : null, nada = cx('<span class="card-fraco">-</span>');
+      var podeSub = !!TIPO_CARTAO[i.tipo];
+      var nada = '<span class="fx-nao">-</span>';
+      var linha = function (r, val) { return '<div class="fx-c"><dt>' + r + '</dt><dd>' + val + '</dd></div>'; };
+      var pessoa = function (nome) { return nome ? '<span class="fx-pessoa"><span class="avatar" style="margin:0">' + esc(iniciais(nome)) + '</span>' + esc(nome) + '</span>' : nada; };
+      var ep = i.pai_id ? d.itens.filter(function (x) { return x.id === i.pai_id; })[0] : null;
       var ver = nomeDe(d.versoes, i.versao_id), spr = (d.sprints.filter(function (x) { return x.id === i.sprint_id; })[0] || {}).nome;
-      var ficha = '<div class="gp-ver">' +
-        par('Tipo', '<span class="gp-tipo" data-t="' + esc(i.tipo) + '">' + esc(TIPO_N[i.tipo]) + '</span>') +
-        par('Etapa', '<span class="gp-et-linha">' + etiquetaEtapa(i.etapa) + '<span class="card-fraco" id="gi-dias"></span></span>') +
-        par('Prioridade', '<span class="gp-tipo gp-prio" data-p="' + esc(i.prioridade) + '">' + esc(PRIO_N[i.prioridade]) + '</span>') +
-        par('Esforço', i.pontos ? cx(esc(i.pontos)) : nada) +
-        par('Frente', nomeDe(d.frentes, i.tipo_frente_id) ? cx(esc(nomeDe(d.frentes, i.tipo_frente_id))) : nada) +
-        par('Responsável', nomeDe(d.pessoas, i.responsavel_id) ? cx(esc(nomeDe(d.pessoas, i.responsavel_id))) : nada) +
-        par('Prazo', i.prazo ? cx('<span class="' + (atrasado(i) ? 'gp-atr' : '') + '">' + dataBR(i.prazo) + (atrasado(i) ? ' · atrasado' : '') + '</span>') : nada) +
-        par('Versão', ver ? cx(esc(ver)) : nada) +
-        par('Sprint', spr ? cx(esc(spr)) : nada) +
-        (ehSub || i.tipo === 'epico' ? '' : par('Épico', ep ? cx('<button class="lnk-texto gp-txt-btn" type="button" data-gp-abrir="' + esc(ep.id) + '">' + esc(ep.chave + ' · ' + ep.titulo) + '</button>') : nada)) +
-        '</div>' + (i.sinalizado ? '<div class="gp-bloqueio">' + ic('triangle-alert') + '<div><b>Bloqueada</b><span>' + esc(i.motivo_sinal || 'Sem motivo informado') + '</span><span>Quem precisa resolver: <b>' + esc(resolvedorTexto(bloqueioDe(i.id)) || 'não informado') + '</b></span></div></div>' : '');
-      var desc = '<section class="fc-bloco gp-sec gp-ver-desc"><h3>Descrição</h3><p id="gi-desc-txt"' + ((i.descricao || '').length > 180 ? ' data-curta' : '') + '>' + (i.descricao ? esc(i.descricao) : '<span class="card-fraco">Sem descrição.</span>') + '</p>' + ((i.descricao || '').length > 180 ? '<button class="pv-mais" type="button" data-gp="desc-mais">ver mais</button>' : '') + '</section>';
-      var virar = i.tipo === 'ideia' ? '<section class="fc-bloco gp-sec gp-virar"><h3>Transformar esta ideia</h3><p class="card-fraco">Ela continua sendo ' + esc(i.chave) + ', com os mesmos comentários e o mesmo histórico. Vai para o Backlog.</p><div class="gp-virar-botoes">' + ['historia', 'tarefa', 'bug', 'melhoria', 'epico'].map(function (tp) { return '<button class="btn btn-2 btn-p" type="button" data-gp-virar-btn="' + esc(tp) + '">' + ic('arrow-right') + esc(TIPO_N[tp]) + '</button>'; }).join('') + '</div></section>' : '';
-      $('gp-item-corpo').classList.add('gp-tres');
-      $('gp-item-corpo').innerHTML = '<div class="gp-item-3">' +
-        '<div class="gp-col-item">' + trilha + ficha + '</div>' +
-        '<div class="gp-col-item">' + desc + virar + '<div id="gi-col2">' + carregandoGp() + '</div></div>' +
-        '<div class="gp-col-item">' + blocoLigadas(i) + '<div id="gi-col3"></div></div>' +
+
+      var info = '<section class="fx-bloco"><div class="fx-bloco-topo">' + ic('circle-alert') + '<h2>Informações</h2></div><dl class="fx-campos">' +
+        linha('Responsável', pessoa(nomeDe(d.pessoas, i.responsavel_id))) +
+        linha('Pai', ep ? '<button class="lnk-texto gp-txt-btn" type="button" data-gp-abrir="' + esc(ep.id) + '">' + esc(ep.chave + ' · ' + ep.titulo) + '</button>' : nada) +
+        linha('Data de entrega', i.prazo ? '<span class="' + (atrasado(i) ? 'gp-atr' : '') + '">' + dataBR(i.prazo) + (atrasado(i) ? ' · atrasado' : '') + '</span>' : nada) +
+        linha('Data de início', '<span class="fx-nao" title="Campo ainda não existe no banco">Não definida</span>') +
+        linha('Relator', pessoa(nomeDe(d.pessoas, i.relator_id))) +
+        '</dl></section>';
+
+      var mais = '<section class="fx-bloco"><div class="fx-bloco-topo">' + ic('settings') + '<h2>Mais detalhes</h2></div><dl class="fx-campos">' +
+        linha('Tipo', '<span class="gp-tipo" data-t="' + esc(i.tipo) + '">' + esc(TIPO_N[i.tipo]) + '</span>') +
+        linha('Etapa', etiquetaEtapa(i.etapa) + ' <span class="card-fraco" id="gi-dias"></span>') +
+        linha('Prioridade', '<span class="gp-tipo gp-prio" data-p="' + esc(i.prioridade) + '">' + esc(PRIO_N[i.prioridade]) + '</span>') +
+        linha('Esforço', i.pontos ? esc(i.pontos) : nada) +
+        linha('Frente', nomeDe(d.frentes, i.tipo_frente_id) ? esc(nomeDe(d.frentes, i.tipo_frente_id)) : nada) +
+        linha('Sprint', spr ? esc(spr) : nada) +
+        linha('Versão', ver ? esc(ver) : nada) +
+        '</dl></section>';
+
+      var bloqueio = i.sinalizado ? '<div class="gp-bloqueio">' + ic('triangle-alert') + '<div><b>Bloqueada</b><span>' + esc(i.motivo_sinal || 'Sem motivo informado') + '</span><span>Quem precisa resolver: <b>' + esc(resolvedorTexto(bloqueioDe(i.id)) || 'não informado') + '</b></span></div></div>' : '';
+      var rodape = '<p class="card-fraco" style="padding:0 4px">Criado em ' + esc(dataBR(i.created_at)) + (i.updated_at ? ' · alterado ' + esc(horaBR(i.updated_at)) : '') + '</p>';
+
+      var desc = '<section class="fx-sec"><h2>Descrição</h2>' + (i.descricao ? '<p class="fx-desc-txt">' + esc(i.descricao) + '</p>' : '<p class="fx-vazio">Sem descrição. Para escrever, clique em Editar.</p>') + '</section>';
+      var anexos = '<section class="fx-sec"><h2>Anexos</h2><div class="fx-anexo">' + ic('file-text') + '<span>Anexos ainda não foram ligados ao banco.</span></div></section>';
+      var virar = i.tipo === 'ideia' ? '<section class="fx-sec"><h2>Transformar esta ideia</h2><p class="fx-vazio">Ela continua sendo ' + esc(i.chave) + ', com os mesmos comentários e o mesmo histórico. Vai para o Backlog.</p><div class="gp-virar-botoes">' + ['historia', 'tarefa', 'bug', 'melhoria', 'epico'].map(function (tp) { return '<button class="btn btn-2 btn-p" type="button" data-gp-virar-btn="' + esc(tp) + '">' + ic('arrow-right') + esc(TIPO_N[tp]) + '</button>'; }).join('') + '</div></section>' : '';
+
+      $('gp-item-corpo').classList.add('gp-ficha');
+      $('gp-item-corpo').classList.remove('gp-tres');
+      $('gp-item-corpo').innerHTML = '<div class="fx-corpo">' +
+        '<div class="fx-esq">' +
+          '<div class="fx-tit">' + trilha + '<h1>' + esc(i.titulo) + '</h1>' +
+            '<div class="fx-tit-acoes">' +
+              (podeSub ? '<button class="btn btn-2 btn-p" type="button" data-gp="nova-sub">' + ic('plus') + 'Subtarefa</button>' : '') +
+              (i.tipo === 'epico' ? '<button class="btn btn-2 btn-p" type="button" data-gp="novo-no-epico">' + ic('plus') + 'Item neste épico</button>' : '') +
+            '</div>' +
+          '</div>' +
+          desc + virar + anexos +
+          '<div id="gi-subs">' + carregandoGp() + '</div>' +
+          blocoLigadas(i) +
+          '<div id="gi-links"></div>' +
+          '<section class="fx-sec"><h2>Atividade</h2><div id="gi-ativ"></div></section>' +
+        '</div>' +
+        '<div class="fx-dir">' + info + mais + '<div id="gi-crit"></div>' + bloqueio + rodape + '</div>' +
         '</div>';
       if (!$('gp-item').open) $('gp-item').showModal();
       $('gi-editar').focus(); gpDetalhe(i.id);
       var bl = bloqueioDe(i.id); if (bl && bl.resolve && !EX.nomes[bl.resolve]) buscarNomes([bl.resolve]).then(function (ok) { if (ok && jItem === i.id && !jEdita) gpAbrirItem(i.id); });
       return;
     }
+    $('gp-item-corpo').classList.remove('gp-ficha');
     $('gp-item-corpo').classList.remove('gp-tres');
     $('gp-item-corpo').innerHTML = trilha +
       '<div class="gp-campos">' +
@@ -2247,7 +2608,7 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
         '<label class="campo"><span class="campo-rotulo">Prazo</span><input class="campo-input" id="gi-prazo" type="date" value="' + esc(v.prazo ? String(v.prazo).slice(0, 10) : '') + '"></label>' +
         '<label class="campo"><span class="campo-rotulo">Versão</span><select class="campo-input" id="gi-versao">' + opcoes(d.versoes, v.versao_id, 'Sem versão', function (x) { return x.numero + (x.nome ? ' · ' + x.nome : ''); }) + '</select></label>' +
         '<label class="campo"><span class="campo-rotulo">Sprint</span><select class="campo-input" id="gi-sprint">' + opcoes(d.sprints.filter(function (s) { return s.situacao !== 'encerrada' || s.id === v.sprint_id; }), v.sprint_id, 'Sem sprint', function (s) { return s.nome + (s.situacao === 'ativa' ? ' (ativa)' : ''); }) + '</select></label>' +
-        (ehSub ? '<input type="hidden" id="gi-pai" value="' + esc(v.pai_id) + '">' : '<label class="campo" id="gi-pai-c"' + (v.tipo === 'epico' ? ' hidden' : '') + '><span class="campo-rotulo">Épico</span><select class="campo-input" id="gi-pai">' + opcoes(epicos().filter(function (x) { return !i || x.id !== i.id; }), v.pai_id, 'Sem épico', function (x) { return x.chave + ' · ' + x.titulo; }) + '</select></label>') +
+        (ehSub ? '<input type="hidden" id="gi-pai" value="' + esc(v.pai_id) + '">' : '<label class="campo" id="gi-pai-c"' + (v.tipo === 'epico' || v.tipo === 'ideia' ? ' hidden' : '') + '><span class="campo-rotulo" id="gi-pai-r">' + rotuloPai(v.tipo) + '</span><select class="campo-input" id="gi-pai">' + opcoesPai(v.tipo, i ? i.id : null, v.pai_id) + '</select></label>') +
         '<label class="campo larga"><span class="campo-rotulo">Descrição</span><textarea class="campo-input" id="gi-desc">' + esc(v.descricao || '') + '</textarea></label>' +
         '<label class="campo larga" style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" id="gi-sinal"' + (v.sinalizado ? ' checked' : '') + ' style="width:18px;height:18px;accent-color:#CA0000"> <span class="campo-rotulo">Tarefa bloqueada</span></label>' +
         '<div class="gp-campos larga" id="gi-motivo-c"' + (v.sinalizado ? '' : ' hidden') + ' style="grid-column:1/-1">' +
@@ -2274,7 +2635,7 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
       return buscarNomes(lg.map(function (l) { return l.quem; })).then(function () { return [r[0], lg]; });
     }).then(function (r) {
       var rows = r[0], lg = r[1];
-      var x = obj(rows); if (jItem !== id || !($('gi-extra') || $('gi-col2'))) return;
+      var x = obj(rows); if (jItem !== id || !($('gi-extra') || $('gi-ativ'))) return;
       var hist = montarHistorico(x.historico || [], lg);
       var desde = (x.historico || []).filter(function (h) { return (h.campo === 'etapa' && h.para === it.etapa) || h.campo === 'criado'; })[0];
       if (desde && $('gi-dias')) { var dd = Math.floor((Date.now() - Date.parse(desde.em)) / 86400000); $('gi-dias').textContent = dd <= 0 ? '· desde hoje' : '· há ' + dd + (dd === 1 ? ' dia' : ' dias'); }
@@ -2288,10 +2649,43 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
       var secLinks = '<section class="fc-bloco gp-sec"><h3>Código e links</h3><div class="gp-lista">' + (x.links.length ? x.links.map(function (l) { return '<div><span class="gp-tipo">' + esc(l.tipo.toUpperCase()) + '</span><span class="gp-cresce">' + (l.url ? '<a class="lnk-texto" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.titulo || l.ref) + '</a>' : esc(l.titulo || l.ref)) + '</span><span class="card-fraco">' + esc(l.estado || '') + '</span></div>'; }).join('') : '<div class="card-fraco">Nenhum branch, commit ou PR ligado. Use a chave ' + esc(it.chave || '') + ' no nome do branch ou no título do PR.</div>') + '</div>' +
         (jEdita ? '<div class="gp-linha-add"><input class="campo-input" id="gi-novo-link" type="url" placeholder="https://"><button class="btn btn-2" type="button" data-gp="add-link">' + ic('external-link') + 'Link</button></div>' : '') + '</section>';
       var secHist = '<section class="fc-bloco gp-sec"><h3>Histórico</h3><div>' + (hist.length ? hist.map(function (h) { return '<div class="gp-hist"><b>' + esc(h.titulo) + '</b> ' + esc(h.texto) + '<br><span>' + esc(h.quem) + ' · ' + horaBR(h.em) + '</span></div>'; }).join('') : '<p class="card-fraco">Sem alterações registradas.</p>') + '</div></section>';
-      if ($('gi-col2') && $('gi-col3')) { $('gi-col2').innerHTML = secSub + secEpico + secCrit; $('gi-col3').innerHTML = secCom + secLinks + secHist; }
-      else $('gi-extra').innerHTML = secSub + secEpico + secCrit + secCom + secLinks + secHist;
-    }).catch(function (e) { var cx = $('gi-extra') || $('gi-col2'); if (cx) { var m = erroGp(e); cx.innerHTML = '<p class="card-fraco">' + esc(m[0] + '. ' + m[1]) + '</p>'; if ($('gi-col3')) $('gi-col3').innerHTML = ''; } });
+      if ($('gi-ativ')) {
+        $('gi-subs').innerHTML = secSub + secEpico;
+        $('gi-crit').innerHTML = secCrit;
+        $('gi-links').innerHTML = secLinks;
+        $('gi-ativ').innerHTML = abasAtividade(x.comentarios || [], hist);
+      } else if ($('gi-extra')) $('gi-extra').innerHTML = secSub + secEpico + secCrit + secCom + secLinks + secHist;
+    }).catch(function (e) { var cx = $('gi-extra') || $('gi-subs'); if (cx) { var m = erroGp(e); cx.innerHTML = '<p class="fx-vazio">' + esc(m[0] + '. ' + m[1]) + '</p>'; if ($('gi-ativ')) $('gi-ativ').innerHTML = ''; } });
   }
+  function evCom(c) {
+    return '<div class="fx-ev" data-t="com"><span class="fx-ev-i">' + ic('message-circle') + '</span><span class="fx-ev-c">' +
+      '<span class="fx-ev-1"><span class="fx-ev-q">' + esc(c.autor || 'Sem autor') + '</span><span class="fx-ev-d">comentou · ' + esc(horaBR(c.em)) + '</span></span>' +
+      '<span class="fx-ev-txt">' + esc(c.texto) + '</span></span></div>';
+  }
+  function evHist(h) {
+    var icone = h.titulo === 'Criado' ? 'plus' : h.titulo === 'Etapa' ? 'arrow-up-down' : 'pencil';
+    return '<div class="fx-ev" data-t="hist"><span class="fx-ev-i">' + ic(icone) + '</span><span class="fx-ev-c">' +
+      '<span class="fx-ev-1"><span class="fx-ev-q">' + esc(h.quem) + '</span><span class="fx-ev-d">' + esc((h.titulo + ' ' + (h.texto || '')).trim()) + ' · ' + esc(horaBR(h.em)) + '</span></span></span></div>';
+  }
+  function abasAtividade(coms, hist) {
+    var vazio = function (t) { return '<p class="fx-vazio" style="padding:12px 0">' + t + '</p>'; };
+    var tudo = (coms || []).map(function (c) { return { em: c.em, html: evCom(c) }; })
+      .concat((hist || []).map(function (h) { return { em: h.em, html: evHist(h) }; }))
+      .sort(function (a, b) { return Date.parse(b.em) - Date.parse(a.em); });
+    var painel = {
+      tudo: tudo.length ? tudo.map(function (x) { return x.html; }).join('') : vazio('Nada aconteceu neste item ainda.'),
+      com: (coms || []).length ? coms.map(evCom).join('') : vazio('Nenhum comentário. Para comentar, clique em Editar.'),
+      hist: (hist || []).length ? hist.map(evHist).join('') : vazio('Sem alterações registradas.'),
+      diario: vazio('O registro de atividades ainda não foi ligado ao banco. Aqui vai ficar o diário do item: o que foi feito, quando, e quanto tempo levou.')
+    };
+    var abas = [['tudo', 'Tudo'], ['com', 'Comentários'], ['hist', 'Histórico'], ['diario', 'Registro de atividades']];
+    return '<div class="fx-abas" role="tablist" aria-label="Atividade do item">' + abas.map(function (a, k) {
+      return '<button role="tab" type="button" data-gp-ativ="' + a[0] + '" aria-selected="' + (k === 0) + '"' + (k === 0 ? '' : ' tabindex="-1"') + '>' + a[1] + '</button>';
+    }).join('') + '</div>' + abas.map(function (a, k) {
+      return '<div class="fx-fluxo" data-ativ="' + a[0] + '"' + (k === 0 ? '' : ' hidden') + '>' + painel[a[0]] + '</div>';
+    }).join('');
+  }
+
   function preencherResolve(b) {
     carregarPessoas().then(function (ps) {
       var sel = $('gi-resolve'); if (!sel) return;
@@ -2301,7 +2695,7 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
       $('gi-resolve-txt-c').hidden = sel.value !== '__texto';
     });
   }
-  var CAMPO_N = { titulo: 'título', tipo: 'tipo', prioridade: 'prioridade', pontos: 'esforço', tipo_frente_id: 'frente', responsavel_id: 'responsável', prazo: 'prazo', versao_id: 'versão', sprint_id: 'sprint', pai_id: 'épico', descricao: 'descrição', sinalizado: 'bloqueio', motivo_sinal: 'motivo do bloqueio' };
+  var CAMPO_N = { titulo: 'título', tipo: 'tipo', prioridade: 'prioridade', pontos: 'esforço', tipo_frente_id: 'frente', responsavel_id: 'responsável', prazo: 'prazo', versao_id: 'versão', sprint_id: 'sprint', pai_id: 'pai', descricao: 'descrição', sinalizado: 'bloqueio', motivo_sinal: 'motivo do bloqueio' };
   // junta o histórico do banco (quando e etapa anterior) com o registro da página (quem fez)
   function montarHistorico(hs, logs) {
     var usados = {}, quemDe = function (l) { return l ? (nomeDeUsuario(l.quem) || 'Pessoa sem nome visível') : null; };
@@ -2608,6 +3002,13 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
     if ((b = t.closest('[data-gp-vista]'))) { trocarVista(b.dataset.gpVista); gpDesenharApp(); return; }
     if ((b = t.closest('[data-gp-modo]'))) { var m = b.dataset.gpModo; if (m === GP.d.app.modo) return; sql(Q.modoApp(GP.d.app.id, m)).then(function () { GP.d.app.modo = m; toast('sucesso', 'Modo ' + (m === 'scrum' ? 'Scrum' : 'Kanban')); gpDesenharApp(); sql(Q.listaApps()).then(function (r) { GP.apps = r; desenharListaApps(); }).catch(function () {}); }).catch(falhou); return; }
     if ((b = t.closest('[data-gp-ord]'))) { var c = b.dataset.gpOrd; GP.ord = { col: c, dir: GP.ord.col === c ? -GP.ord.dir : 1 }; gpDesenharItens(); return; }
+    if ((b = t.closest('[data-gp-ativ]'))) {
+      var alvoA = b.dataset.gpAtiv, cxA = b.closest('#gi-ativ') || document;
+      cxA.querySelectorAll('[data-gp-ativ]').forEach(function (x) { var sel = x.dataset.gpAtiv === alvoA; x.setAttribute('aria-selected', String(sel)); if (sel) x.removeAttribute('tabindex'); else x.setAttribute('tabindex', '-1'); });
+      cxA.querySelectorAll('[data-ativ]').forEach(function (x) { x.hidden = x.dataset.ativ !== alvoA; });
+      return;
+    }
+    if (t.id === 'gi-voltar' || t.closest('#gi-voltar')) { if (jEdita && jItem) gpAbrirItem(jItem); else $('gp-item').close(); return; }
     if ((b = t.closest('[data-gp-abrir]'))) { gpAbrirItem(b.dataset.gpAbrir); return; }
     if ((b = t.closest('.gp-cartao'))) { gpAbrirItem(b.dataset.gpItem); return; }
     if ((b = t.closest('[data-gp-puxar]'))) { moverPara(b.dataset.gpPuxar, 'to do', null); return; }
@@ -2633,6 +3034,7 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
     else if (acao === 'novo') gpAbrirItem(null, GP.f.epico && GP.f.epico !== 'sem' ? { pai_id: GP.f.epico } : null);
     else if (acao === 'novo-backlog') gpAbrirItem(null, { etapa: 'backlog', sprint_id: null });
     else if (acao === 'novo-no-epico') { var ep = jItem; $('gp-item').close(); gpAbrirItem(null, { pai_id: ep }); }
+    else if (acao === 'nova-sub') { var pi = jItem; $('gp-item').close(); gpAbrirItem(null, { tipo: 'subtarefa', pai_id: pi }); }
     else if (acao === 'add-ideia') anotarIdeia();
     else if (acao === 'add-sub') addSub();
     else if (acao === 'export-xlsx') exportar('xlsx');
@@ -2678,7 +3080,7 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
     if (t.dataset.gpCel) { var alvoC = t.dataset.gpId, campoC = t.dataset.gpCel; gravarCampo(alvoC, campoC, t.value).then(function (ok) { if (ok) return recarregarTudo(); }); return; }
     if (t.id === 'gp-filtro-salvo') { var fsv = GP.filtrosSalvos.filter(function (x) { return x.id === t.value; })[0]; if (!fsv) return; var cr2 = typeof fsv.criterios === 'string' ? JSON.parse(fsv.criterios) : fsv.criterios; Object.assign(GP.f, semFiltro(), cr2); gpDesenharItens(); toast('sucesso', 'Filtro aplicado', fsv.nome); return; }
     if (t.dataset.gpSubEtapa) { var sid = t.dataset.gpSubEtapa; var st = GP.d.itens.filter(function (x) { return x.id === sid; })[0]; if (paiFechado(st, t.value)) { t.value = st.etapa; return; } var para = t.value, de = st.etapa; conferirRegra(st, para).then(function (pode) { if (!pode) { t.value = de; return; } acaoDetalhe(Q.moverItem(sid, para, st ? st.ordem : 0), 'Subtarefa em ' + ETQ[para]).then(function (feito) { if (feito) registrar({ item_id: sid, acao: 'mover', de_etapa: de, para_etapa: para }); }); }).catch(falhou); return; }
-    if (t.id === 'gi-tipo') { var tp = t.value; $('gi-etapa').disabled = tp === 'ideia'; if (tp === 'ideia') $('gi-etapa').value = 'backlog'; if ($('gi-pai-c')) $('gi-pai-c').hidden = tp === 'epico'; return; }
+    if (t.id === 'gi-tipo') { var tp = t.value; $('gi-etapa').disabled = tp === 'ideia'; if (tp === 'ideia') $('gi-etapa').value = 'backlog'; if ($('gi-pai-c')) { $('gi-pai-c').hidden = tp === 'epico' || tp === 'ideia'; if ($('gi-pai-r')) $('gi-pai-r').textContent = rotuloPai(tp); if ($('gi-pai')) $('gi-pai').innerHTML = opcoesPai(tp, jItem, $('gi-pai').value); } return; }
     if (t.id === 'gi-sinal') { $('gi-motivo-c').hidden = !t.checked; return; }
     if (t.id === 'gi-resolve') { $('gi-resolve-txt-c').hidden = t.value !== '__texto'; return; }
     if (t.dataset.gpCrit) { acaoDetalhe(Q.marcarCriterio(t.dataset.gpCrit, t.checked)); return; }
@@ -2733,6 +3135,21 @@ button.gp-faixa-tit:hover { text-decoration: underline; }
 
   // Ativo é uma tela só: Voltar leva direto a Operações
   function gpVoltar() { return false; }
+
+  /* ================= Visão geral =================
+     Dados de exemplo fixos nesta fase, por decisão do Raphael (12/11/2026).
+     Só o cumprimento e a data saem do relógio. */
+  function vgEntrar() {
+    var d = new Date(), h = d.getHours();
+    var ola = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+    var quem = (EX && EX.eu && EX.nomes && EX.nomes[EX.eu]) ? String(EX.nomes[EX.eu]).split(' ')[0] : '';
+    $('vg-ola').textContent = quem ? ola + ', ' + quem : ola;
+    var DIAS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    var MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    $('vg-data').textContent = DIAS[d.getDay()] + ', ' + d.getDate() + ' de ' + MESES[d.getMonth()] + ' · 1 aplicativo em produção';
+    entrar($('tela-visao').firstElementChild);
+  }
+  /* fim Visão geral */
 
   /* ================= CRM · Clientes e Atendimento =================
      Dados de exemplo fixos nesta fase, por decisão do Raphael (12/11/2026).
